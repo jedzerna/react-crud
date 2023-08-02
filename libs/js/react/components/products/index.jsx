@@ -10,7 +10,6 @@ var ProductRow = React.createClass({
                            checked={(this.props.selectedRows && this.props.selectedRows.indexOf(this.props.product.id)) >= 0}
                            onChange={(e) => this.props.toggleOne(e.target.checked, this.props.product.id)} />
                 </td>
-                <td>{this.props.product.id}</td>
                 <td>{this.props.product.department}</td>
                 <td>{this.props.product.toolname}</td>
                 <td>{this.props.product.productname}</td>
@@ -76,12 +75,6 @@ var ProductsTable = React.createClass({
                         <th className="text-center" style={{width:'1.5%'}}>
                             <input type="checkbox" onChange={this.props.toggleAll} />
                         </th>
-                        <th style={{width:'8%'}}>
-                            <a onClick={this.props.sortChanged.bind(null, 'id', this.props.orderType)}>
-                            S. No.
-                                <i className={this.props.sortClass('id')}></i>
-                            </a>
-                        </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'department', this.props.orderType)}>
                             Department
@@ -102,7 +95,7 @@ var ProductsTable = React.createClass({
                         </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'publishers', this.props.orderType)}>
-                            All Customers
+                            Publisher
                                 <i className={this.props.sortClass('publishers')}></i>
                             </a>
                         </th>

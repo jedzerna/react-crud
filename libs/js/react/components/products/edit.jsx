@@ -151,7 +151,7 @@ var UpdateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>All Customers</td>
+                            <td>Publisher</td>
                             <td>
                                     <textarea
                                         className="form-control"
