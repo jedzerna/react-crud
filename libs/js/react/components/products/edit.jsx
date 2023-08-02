@@ -8,6 +8,8 @@ var UpdateProductComponent = React.createClass({
             toolname: '',
             productname: '',
             publishers: '',
+            activities: '',
+            description: '',
             successUpdate: null,
             isLoggedIn: ''
         };
@@ -27,6 +29,8 @@ var UpdateProductComponent = React.createClass({
                 this.setState({department: p.department});
                 this.setState({productname: p.productname});
                 this.setState({toolname: p.toolname});
+                this.setState({activities: p.activities});
+                this.setState({description: p.description});
                 $('.page-header h1').text(p.department);
             }.bind(this));
 
@@ -42,25 +46,33 @@ var UpdateProductComponent = React.createClass({
 
     componentWillUnmount: function() {
         this.serverRequest.abort();
-        this.serverRequestCat.abort();
+        //this.serverRequestCat.abort();
         this.serverRequestProd.abort();
     },
 
-    onNameChange: function(e) {
+    ondepartmentChange: function(e) {
         this.setState({department: e.target.value});
     },
 
-    onCategoryChange: function(e) {
+    onpublishersChange: function(e) {
         this.setState({publishers: e.target.value});
     },
 
-    onDescriptionChange: function(e) {
+    ontoolnameChange: function(e) {
         this.setState({toolname: e.target.value});
     },
 
-    onPriceChange: function(e) {
+    onproductnameChange: function(e) {
         this.setState({productname: e.target.value});
     },
+    onactivitiesChange: function(e) {
+        this.setState({activities: e.target.value});
+    },
+
+    ondescriptionChange: function(e) {
+        this.setState({description: e.target.value});
+    },
+
 
     onSave: function(e) {
         $.post('api/update_product.php', {
@@ -68,11 +80,14 @@ var UpdateProductComponent = React.createClass({
                 department: this.state.department,
                 toolname: this.state.toolname,
                 productname: this.state.productname,
-                publishers: this.state.publishers
+                publishers: this.state.publishers,
+                activities: this.state.activities,
+                description: this.state.description
             },
             function(res) {
                 this.setState({successUpdate: res});
-            }.bind(this));
+            }.bind(this)
+            );
         e.preventDefault();
     },
 
@@ -110,7 +125,7 @@ var UpdateProductComponent = React.createClass({
                                     type="text"
                                     className="form-control"
                                     value={this.state.department}
-                                    onChange={this.onNameChange}
+                                    onChange={this.ondepartmentChange}
                                 />
                             </td>
                         </tr>
@@ -121,7 +136,7 @@ var UpdateProductComponent = React.createClass({
                                     <textarea
                                         className="form-control"
                                         value={this.state.toolname}
-                                        onChange={this.onDescriptionChange}></textarea>
+                                        onChange={this.ontoolnameChange}></textarea>
                             </td>
                         </tr>
 
@@ -131,7 +146,7 @@ var UpdateProductComponent = React.createClass({
                                     <textarea
                                         className="form-control"
                                         value={this.state.productname}
-                                        onChange={this.onDescriptionChange}></textarea>
+                                        onChange={this.onproductnameChange}></textarea>
                             </td>
                         </tr>
 
@@ -141,10 +156,29 @@ var UpdateProductComponent = React.createClass({
                                     <textarea
                                         className="form-control"
                                         value={this.state.publishers}
-                                        onChange={this.onDescriptionChange}></textarea>
+                                        onChange={this.onpublishersChange}></textarea>
                             </td>
                         </tr>
 
+                        <tr>
+                            <td>Activies</td>
+                            <td>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.activities}
+                                        onChange={this.onactivitiesChange}></textarea>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Description</td>
+                            <td>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.description}
+                                        onChange={this.ondescriptionChange}></textarea>
+                            </td>
+                        </tr>
                         <tr>
                             <td></td>
                             <td>

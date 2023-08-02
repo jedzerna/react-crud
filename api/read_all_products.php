@@ -38,7 +38,7 @@ if(isset($_GET['page']))
 if(isset($_GET['item_per_page']))
     if(!empty($_GET['item_per_page']))
         $limit = $_GET['item_per_page'];
-
+        
 // $results = $product->readAll();
 $results = $product->paginate($where, $currentPage, $limit, $orderBy, $orderType);
 

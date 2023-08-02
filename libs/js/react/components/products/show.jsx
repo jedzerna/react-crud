@@ -7,7 +7,9 @@ var ReadOneProductComponent = React.createClass({
             department: '',
             toolname: '',
             productname: '',
-            publishers: ''
+            publishers: '',
+            activities: '',
+            description: ''
         };
     },
 
@@ -23,6 +25,8 @@ var ReadOneProductComponent = React.createClass({
                 this.setState({department: p.department});
                 this.setState({toolname: p.toolname});
                 this.setState({productname: p.productname});
+                this.setState({activities: p.activities});
+                this.setState({description: p.description});
                 $('.page-header h1').text(p.department);
             }.bind(this)
         );
@@ -38,26 +42,34 @@ var ReadOneProductComponent = React.createClass({
                 <a href="#"
                    className="btn btn-primary margin-bottom-1em"
                 >
-                    All Produscts
+                    All Products
                 </a>
 
                 <table className="table table-bordered table-responsive">
                     <tbody>
                     <tr>
-                        <td>department</td>
+                        <td>Department</td>
                         <td>{this.state.department}</td>
                     </tr>
                     <tr>
-                        <td>toolname</td>
+                        <td>Tool Name</td>
                         <td>{this.state.toolname}</td>
                     </tr>
                     <tr>
-                        <td>productname</td>
+                        <td>Product Name</td>
                         <td>{this.state.productname}</td>
                     </tr>
                     <tr>
-                        <td>publishers</td>
+                        <td>Publishers</td>
                         <td>{this.state.publishers}</td>
+                    </tr>
+                    <tr>
+                        <td>Activities</td>
+                        <td>{this.state.activities}</td>
+                    </tr>
+                    <tr>
+                        <td>Descriptions</td>
+                        <td>{this.state.description}</td>
                     </tr>
                     </tbody>
                 </table>

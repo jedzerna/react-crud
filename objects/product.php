@@ -66,19 +66,19 @@ class Product{
     }
 
     public function paginate($where = '', $page = 1, $limit = 10, $orderBy = 'department', $orderType = 'asc') {
-        $query = "SELECT id, department, toolname, productname, publishers, activities, description
+        $query = "SELECT id, department, toolname, productname, publishers, activities, description 
               FROM ". $this->table_name ." 
               WHERE department LIKE :where
               ORDER BY " . $orderBy . " " . $orderType . "
               LIMIT ". ($page - 1) * $limit ."," . $limit . "
               ";
-
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':where', $where);
         $stmt->execute();
 
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+       // echo $where;
         return json_encode($products);
     }
 
@@ -115,7 +115,7 @@ class Product{
     public function readOne(){
 
         // select one record
-        $query = "SELECT p.id, p.department, p.toolname, p.productname, p.publishers
+        $query = "SELECT p.id, p.department, p.toolname, p.productname, p.publishers, p.activities, p.description
                     FROM " . $this->table_name . " p
                     WHERE p.id=:id";
 
@@ -134,7 +134,7 @@ class Product{
     public function update(){
 
         $query = "UPDATE mastertools
-                SET department=:department, toolname=:toolname, productname=:productname, publishers=:publishers
+                SET department=:department, toolname=:toolname, productname=:productname, publishers=:publishers, activities=:activities, description=:description
                 WHERE id=:id";
 
         //prepare query for excecution
@@ -145,6 +145,8 @@ class Product{
         $toolname=htmlspecialchars(strip_tags($this->toolname));
         $productname=htmlspecialchars(strip_tags($this->productname));
         $publishers=htmlspecialchars(strip_tags($this->publishers));
+        $activities=htmlspecialchars(strip_tags($this->activities));
+        $description=htmlspecialchars(strip_tags($this->description));
         $id=htmlspecialchars(strip_tags($this->id));
 
         // bind the parameters
@@ -152,6 +154,8 @@ class Product{
         $stmt->bindParam(':toolname', $toolname);
         $stmt->bindParam(':productname', $productname);
         $stmt->bindParam(':publishers', $publishers);
+        $stmt->bindParam(':activities', $activities);
+        $stmt->bindParam(':description', $description);
         $stmt->bindParam(':id', $id);
 
         // execute the query

@@ -10,6 +10,7 @@ var ProductRow = React.createClass({
                            checked={(this.props.selectedRows && this.props.selectedRows.indexOf(this.props.product.id)) >= 0}
                            onChange={(e) => this.props.toggleOne(e.target.checked, this.props.product.id)} />
                 </td>
+                <td>{this.props.product.id}</td>
                 <td>{this.props.product.department}</td>
                 <td>{this.props.product.toolname}</td>
                 <td>{this.props.product.productname}</td>
@@ -21,15 +22,15 @@ var ProductRow = React.createClass({
                     ?
                         <td>
                             <a href={'#show?id='+this.props.product.id}
-                               className="btn btn-info m-r-1em">
+                               className="btn btn-info m-r-2em"  style={{width:'100px',margin:'5px'}}>
                                 Read
                             </a>
                             <a href={'#update?id='+this.props.product.id}
-                               className="btn btn-primary m-r-1em">
+                               className="btn btn-primary m-r-1em"  style={{width:'100px',margin:'5px'}}> 
                                 Edit
                             </a>
                             <a href={'#delete?id='+this.props.product.id}
-                               className="btn btn-danger">
+                               className="btn btn-danger"  style={{width:'100px',margin:'5px'}}>
                                 Delete
                             </a>
                         </td>
@@ -75,39 +76,45 @@ var ProductsTable = React.createClass({
                         <th className="text-center" style={{width:'1.5%'}}>
                             <input type="checkbox" onChange={this.props.toggleAll} />
                         </th>
+                        <th style={{width:'8%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'id', this.props.orderType)}>
+                            S. No.
+                                <i className={this.props.sortClass('id')}></i>
+                            </a>
+                        </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'department', this.props.orderType)}>
-                            department
+                            Department
                                 <i className={this.props.sortClass('department')}></i>
                             </a>
                         </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'toolname', this.props.orderType)}>
-                            toolname
+                            Tool Name
                                 <i className={this.props.sortClass('toolname')}></i>
                             </a>
                         </th>
-                        <th style={{width:'9%'}}>
+                        <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'productname', this.props.orderType)}>
-                            productname
+                            Product Name
                                 <i className={this.props.sortClass('productname')}></i>
                             </a>
                         </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'publishers', this.props.orderType)}>
-                            publishers
+                            Publisher
                                 <i className={this.props.sortClass('publishers')}></i>
                             </a>
                         </th>
-                        <th style={{width:'25%'}}>
+                        <th style={{width:'13%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'activities', this.props.orderType)}>
-                            activities
+                            Activities
                                 <i className={this.props.sortClass('activities')}></i>
                             </a>
                         </th>
                         <th style={{width:'25%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'description', this.props.orderType)}>
-                            description
+                            Description
                                 <i className={this.props.sortClass('description')}></i>
                             </a>
                         </th>
@@ -192,7 +199,7 @@ var PaginationComponent = React.createClass({
         var orderType = this.props.orderType;
         var search = this.props.search;
         var appendUrl = '&search=' + search + '&order_by=' + orderBy + '&order_type=' + orderType + '&item_per_page=' + itemPerPage;
-
+        
         // creating page elements, one for each page
         var pageIndicators = [];
         for (let i=1; i <= pagesAmount; i++) {
@@ -313,13 +320,12 @@ var ReadProductsComponent = React.createClass({
 
     populateProducts: function() {
         var parameters = {
-            name: this.state.search,
+            department: this.state.search,
             page: this.state.currentPage,
             item_per_page: this.state.limit,
             order_by: this.state.orderBy,
             order_type: this.state.orderType
         };
-
         this.serverRequest = $.get('api/read_all_products.php', parameters,
             function(products) {
                 if(this.isMounted()) {
@@ -328,7 +334,7 @@ var ReadProductsComponent = React.createClass({
                     });
                 }
             }.bind(this));
-
+            console.log(this.serverRequest);
         this.serverRequest = $.get('api/count_all_products.php', parameters,
             function(data) {
                 this.setState({
@@ -483,11 +489,10 @@ var ReadProductsComponent = React.createClass({
 
     render: function() {
         var filteredProducts = this.state.products;
-        console.log(this.state.search);
         if(this.state.search != ''){
             $('.page-header h1').text('Search "'+ this.state.search +'"');
         }else{
-            $('.page-header h1').text('Master Tools');
+            $('.page-header h1').text('All Master Tools');
         }
 
         return (

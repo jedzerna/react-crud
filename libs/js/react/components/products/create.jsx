@@ -34,27 +34,31 @@ var CreateProductComponent = React.createClass({
 
     
 
+    ondepartmentChange: function(e) {
+        this.setState({
+            department: e.target.value
+        });
+    },
+
     ontoolnameChange: function(e) {
         this.setState({
             toolname: e.target.value
         });
     },
 
-    onPriceChCategoryChange: function(e) {
+    onproductnameChange: function(e) {
+        this.setState({
+            productname: e.target.value
+        });
+    },
+
+    onpublishersChange: function(e) {
         this.setState({
             publishers: e.target.value
         });
     },
 
-    onNameChange: function(e) {
-        this.setState({
-            department: e.target.value
-        });
-    },ange: function(e) {
-        this.setState({
-            productname: e.target.value
-        });
-    },
+    
     
     onactivitiesChange: function(e) {
         this.setState({
@@ -110,27 +114,27 @@ var CreateProductComponent = React.createClass({
 
                 <a href="#"
                    className="btn btn-primary margin-bottom-1em">
-                    All Producssts
+                    All Products
                 </a>
 
                 <form onSubmit={this.onSave}>
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>department</td>
+                            <td>Department</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
                                     value={this.state.department}
                                     required
-                                    onChange={this.onNameChange}
+                                    onChange={this.ondepartmentChange}
                                 />
                             </td>
                         </tr>
 
                         <tr>
-                            <td>toolname</td>
+                            <td>Tool Name</td>
                             <td>
                                     <textarea
                                         className="form-control"
@@ -142,29 +146,29 @@ var CreateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>productname</td>
+                            <td>Product Name</td>
                             <td>
                                     <textarea
                                         className="form-control"
                                         value={this.state.productname}
                                         required
-                                        onChange={this.onPriceChange}>
+                                        onChange={this.onproductnameChange}>
                                     </textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td>publishers</td>
+                            <td>Publisher</td>
                             <td>
                                     <textarea
                                         className="form-control"
                                         value={this.state.publishers}
                                         required
-                                        onChange={this.onCategoryChange}>
+                                        onChange={this.onpublishersChange}>
                                     </textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td>activities</td>
+                            <td>Activities</td>
                             <td>
                                     <textarea
                                         className="form-control"
@@ -175,7 +179,7 @@ var CreateProductComponent = React.createClass({
                             </td>
                         </tr>
                         <tr>
-                            <td>description</td>
+                            <td>Descriptions</td>
                             <td>
                                     <textarea
                                         className="form-control"
