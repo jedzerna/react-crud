@@ -1,81 +1,56 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2016 at 11:23 AM
--- Server version: 5.6.24
--- PHP Version: 5.6.24
+-- Generation Time: Aug 02, 2023 at 11:32 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `php-react`
+-- Database: `novatechdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Table structure for table `mastertools`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `description` text NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `mastertools` (
+  `id` bigint(20) NOT NULL,
+  `department` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `toolname` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `productname` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `activities` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `publishers` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `description` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `mastertools`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created`, `modified`) VALUES
-(1, 'Smartphone', 'Not a stupid phone', '2015-08-02 23:56:46', '2016-12-20 06:51:25'),
-(2, 'Tablet', 'A small smartphone-laptop mix', '2015-08-02 23:56:46', '2016-12-20 06:51:42'),
-(3, 'Ultrabook', 'Ultra portable and powerful laptop', '2016-12-20 13:51:15', '2016-12-20 06:51:52');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `description` text NOT NULL,
-  `price` double NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `category_id`, `created`, `modified`) VALUES
-(32, 'ASUS Zenbook 3', 'The most powerful and ultraportable Zenbook ever', 1799, 3, '2016-12-20 13:53:00', '2016-12-20 06:53:00'),
-(33, 'Dell XPS 13', 'Super powerful and portable ultrabook with ultra thin bezel infinity display', 2199, 3, '2016-12-20 13:53:34', '2016-12-20 06:53:34'),
-(34, 'Samsung Galaxy S7', 'Define what a phone can do', 649, 1, '2016-12-20 13:54:16', '2016-12-20 06:54:16'),
-(35, 'Samsung Galaxy Tab S2', 'Latest Generation of Samsung Galaxy Tab Series tablet', 599, 2, '2016-12-20 13:54:43', '2016-12-20 06:54:43'),
-(36, 'Apple iPad Pro', 'Powerful, thin, and light tablet from Apple', 899, 2, '2016-12-20 13:55:02', '2016-12-20 06:55:02'),
-(37, 'Google Pixel', 'World''s leading smartphone camera, first phone by Google.', 649, 1, '2016-12-20 13:55:23', '2016-12-20 06:55:23'),
-(38, 'Oneplus 3T', 'Never Settle', 439, 1, '2016-12-20 13:59:06', '2016-12-20 06:59:06'),
-(39, 'Asus Zenfone 3 Deluxe', 'Super powerful and gorgeously designed phablet', 799, 1, '2016-12-20 13:59:37', '2016-12-20 06:59:37'),
-(40, 'Xiaomi Mi Mix', 'Bezelless. Powerful. Gorgeous.', 699, 1, '2016-12-20 14:00:20', '2016-12-20 07:00:20'),
-(41, 'Huawei P9', 'First Leica Branded Dual-camera Smartphone', 499, 1, '2016-12-20 14:00:45', '2016-12-20 07:00:45'),
-(42, 'Xiaomi Mi 5S', 'First Xiaomi smartphone to come with light-sensitive camera', 349, 1, '2016-12-20 14:01:40', '2016-12-20 07:10:14'),
-(43, 'LG V20', 'Superb dual camera, Space-grade Aluminum build, fantastic sound quality', 749, 1, '2016-12-20 14:02:28', '2016-12-20 07:02:28');
+INSERT INTO `mastertools` (`id`, `department`, `toolname`, `productname`, `activities`, `publishers`, `description`) VALUES
+(6, '\r\nTechnolgy - Electronic Deliverables', 'XML to Epub', 'TIAT', 'XML file toEpub format', 'Frontiers', 'XML file will be converted to Epub format in automatic way'),
+(7, 'Technolgy - SMART', 'Preview Automation', 'Smart', 'Creation of Online Packages', 'CUP/TandF/IWAP/AIP/SAGE', 'An automatic creation of online package, validation and uploads for article based delivery'),
+(8, 'Technolgy - SMART\r\n', 'Issue Automation', 'Smart', 'Creation of Online Packages', 'TandF', 'An automatic creation of online package, validation and uploads for issue based delivery'),
+(20, 'Technolgy - Electronic Deliverables', 'PubMed conversion', 'TIAT', 'All Customers', 'Pubmed Validation', 'XML file will be converted to PubMed specific format and an auto validation will happen against PMC style checker tool'),
+(21, 'Technolgy - Electronic Deliverables', 'AMO PDF creation', 'TIAT', 'TandF', 'PDF Creation tool', 'We have a tool to create the PDF from word to add DOI, watermark, copyright, etc. in an automated way in the PDF'),
+(22, 'Technolgy - Electronic Deliverables', 'Equation to image', 'TIAT', 'All Customers', 'Image Creation tool', 'TeX/Latex to image will be created using this tool'),
+(23, 'Technolgy - Electronic Deliverables', 'Cloud based LaTeX composition tool', 'Cloud based Automation', 'OSA', 'PDF Creation tool', 'For OSA publisher, we have installed LaTeX software on AWS cloud and created watch folder concept for generating PDF. Customer w'),
+(24, 'Technolgy - Latex', 'LaTeX Issue Automation', 'Smart', 'TandF', 'PDF Creation tool', 'Once the CATS xml was booked in, the respective xml files will be moved into the issue folder along with the figures and style f'),
+(25, 'Technolgy - Electronic Deliverables', 'TeX to Word conversion', 'TIAT', 'All Customers', 'Word creation from Tex file', 'Using the author supplied TeX file with minimal structuring this tool converts the .tex file into .doc format with all the equat');
 
 -- --------------------------------------------------------
 
@@ -83,34 +58,28 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `category_id`, `cr
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `password` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `created_at`) VALUES
-(1, 'admin@react-crud.com', '$2y$10$98uieNukRl.w8dY3O.sTiegbcCuXueuDX9Df174wjaUBO4uTFQ91S', '2016-12-23 02:54:42');
+(1, 'jedzerna4@gmail.com', '$2y$10$r0WoUtyD0qi31yYcPUtfveysG/HQKAk7aNsaZ.F0EGVZQc2hWsFXa', '2023-08-01 05:45:07');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `categories`
+-- Indexes for table `mastertools`
 --
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
+ALTER TABLE `mastertools`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -124,20 +93,18 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT for table `mastertools`
 --
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+ALTER TABLE `mastertools`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
