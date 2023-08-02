@@ -157,7 +157,7 @@ var CreateProductComponent = React.createClass({
                             </td>
                         </tr>
                         <tr>
-                            <td>Publisher</td>
+                            <td>All Customers</td>
                             <td>
                                     <textarea
                                         className="form-control"

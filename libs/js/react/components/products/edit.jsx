@@ -119,7 +119,7 @@ var UpdateProductComponent = React.createClass({
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>department</td>
+                            <td>Department</td>
                             <td>
                                 <input
                                     type="text"
@@ -131,7 +131,7 @@ var UpdateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>toolname</td>
+                            <td>Tool Name</td>
                             <td>
                                     <textarea
                                         className="form-control"
@@ -141,7 +141,7 @@ var UpdateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>productname</td>
+                            <td>Product Name</td>
                             <td>
                                     <textarea
                                         className="form-control"
@@ -151,7 +151,7 @@ var UpdateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>publishers</td>
+                            <td>All Customers</td>
                             <td>
                                     <textarea
                                         className="form-control"

@@ -102,7 +102,7 @@ var ProductsTable = React.createClass({
                         </th>
                         <th style={{width:'15%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'publishers', this.props.orderType)}>
-                            Publisher
+                            All Customers
                                 <i className={this.props.sortClass('publishers')}></i>
                             </a>
                         </th>

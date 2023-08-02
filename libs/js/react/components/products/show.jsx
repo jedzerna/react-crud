@@ -60,7 +60,7 @@ var ReadOneProductComponent = React.createClass({
                         <td>{this.state.productname}</td>
                     </tr>
                     <tr>
-                        <td>Publishers</td>
+                        <td>All Customers</td>
                         <td>{this.state.publishers}</td>
                     </tr>
                     <tr>
