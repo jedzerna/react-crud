@@ -4,10 +4,10 @@ var ReadOneProductComponent = React.createClass({
     getInitialState: function() {
         return {
             id: 0,
-            name: '',
-            description: '',
-            price: 0,
-            category_name: ''
+            department: '',
+            toolname: '',
+            productname: '',
+            publishers: ''
         };
     },
 
@@ -18,12 +18,12 @@ var ReadOneProductComponent = React.createClass({
             {prod_id: productId},
             function(product) {
                 var p = JSON.parse(product)[0];
-                this.setState({category_name: p.category_name});
+                this.setState({publishers: p.publishers});
                 this.setState({id: p.id});
-                this.setState({name: p.name});
-                this.setState({description: p.description});
-                this.setState({price: p.price});
-                $('.page-header h1').text(p.name);
+                this.setState({department: p.department});
+                this.setState({toolname: p.toolname});
+                this.setState({productname: p.productname});
+                $('.page-header h1').text(p.department);
             }.bind(this)
         );
     },
@@ -38,26 +38,26 @@ var ReadOneProductComponent = React.createClass({
                 <a href="#"
                    className="btn btn-primary margin-bottom-1em"
                 >
-                    All Products
+                    All Produscts
                 </a>
 
                 <table className="table table-bordered table-responsive">
                     <tbody>
                     <tr>
-                        <td>Name</td>
-                        <td>{this.state.name}</td>
+                        <td>department</td>
+                        <td>{this.state.department}</td>
                     </tr>
                     <tr>
-                        <td>Description</td>
-                        <td>{this.state.description}</td>
+                        <td>toolname</td>
+                        <td>{this.state.toolname}</td>
                     </tr>
                     <tr>
-                        <td>Price ($)</td>
-                        <td>{this.state.price}</td>
+                        <td>productname</td>
+                        <td>{this.state.productname}</td>
                     </tr>
                     <tr>
-                        <td>Category</td>
-                        <td>{this.state.category_name}</td>
+                        <td>publishers</td>
+                        <td>{this.state.publishers}</td>
                     </tr>
                     </tbody>
                 </table>

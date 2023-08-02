@@ -4,11 +4,10 @@ var UpdateProductComponent = React.createClass({
     getInitialState:function() {
         return {
             id: 0,
-            name: '',
-            description: '',
-            price: 0,
-            selectedCategoryId: 0,
-            categories: [],
+            department: '',
+            toolname: '',
+            productname: '',
+            publishers: '',
             successUpdate: null,
             isLoggedIn: ''
         };
@@ -17,24 +16,18 @@ var UpdateProductComponent = React.createClass({
     componentDidMount: function() {
         var productId = this.props.productId;
 
-        // Populate categories drop down list
-        this.serverRequestCat = $.get('api/read_all_categories.php', function(categories) {
-            this.setState({
-                categories: JSON.parse(categories)
-            });
-        }.bind(this));
 
         // load form values
         this.serverRequestProd = $.post('api/read_one_product.php',
             {prod_id: productId},
             function(product) {
                 var p = JSON.parse(product)[0];
-                this.setState({selectedCategoryId: p.category_id});
+                this.setState({publishers: p.publishers});
                 this.setState({id: p.id});
-                this.setState({name: p.name});
-                this.setState({price: p.price});
-                this.setState({description: p.description});
-                $('.page-header h1').text(p.name);
+                this.setState({department: p.department});
+                this.setState({productname: p.productname});
+                this.setState({toolname: p.toolname});
+                $('.page-header h1').text(p.department);
             }.bind(this));
 
         this.serverRequest = $.get('api/is_logged_in.php', function(result) {
@@ -54,28 +47,28 @@ var UpdateProductComponent = React.createClass({
     },
 
     onNameChange: function(e) {
-        this.setState({name: e.target.value});
+        this.setState({department: e.target.value});
     },
 
     onCategoryChange: function(e) {
-        this.setState({selectedCategoryId: e.target.value});
+        this.setState({publishers: e.target.value});
     },
 
     onDescriptionChange: function(e) {
-        this.setState({description: e.target.value});
+        this.setState({toolname: e.target.value});
     },
 
     onPriceChange: function(e) {
-        this.setState({price: e.target.value});
+        this.setState({productname: e.target.value});
     },
 
     onSave: function(e) {
         $.post('api/update_product.php', {
                 id: this.state.id,
-                name: this.state.name,
-                description: this.state.description,
-                price: this.state.price,
-                category_id: this.state.selectedCategoryId
+                department: this.state.department,
+                toolname: this.state.toolname,
+                productname: this.state.productname,
+                publishers: this.state.publishers
             },
             function(res) {
                 this.setState({successUpdate: res});
@@ -84,12 +77,7 @@ var UpdateProductComponent = React.createClass({
     },
 
     render: function() {
-        var categoriesOptions = this.state.categories.map(function(category) {
-            return (
-                <option key={category.id} value={category.id}>{category.name}</option>
-            );
-        });
-
+       
         return (
             <div>
                 {
@@ -116,51 +104,44 @@ var UpdateProductComponent = React.createClass({
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>Name</td>
+                            <td>department</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    value={this.state.name}
+                                    value={this.state.department}
                                     onChange={this.onNameChange}
                                 />
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Description</td>
+                            <td>toolname</td>
                             <td>
                                     <textarea
                                         className="form-control"
-                                        value={this.state.description}
+                                        value={this.state.toolname}
                                         onChange={this.onDescriptionChange}></textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Price ($)</td>
+                            <td>productname</td>
                             <td>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    value={this.state.price}
-                                    className="form-control"
-                                    onChange={this.onPriceChange}
-                                />
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.productname}
+                                        onChange={this.onDescriptionChange}></textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Category</td>
+                            <td>publishers</td>
                             <td>
-                                <select
-                                    onChange={this.onCategoryChange}
-                                    className="form-control"
-                                    value={this.state.selectedCategoryId}
-                                >
-                                    <option value="-1">Select Category...</option>
-                                    {categoriesOptions}
-                                </select>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.publishers}
+                                        onChange={this.onDescriptionChange}></textarea>
                             </td>
                         </tr>
 

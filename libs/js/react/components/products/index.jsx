@@ -10,10 +10,12 @@ var ProductRow = React.createClass({
                            checked={(this.props.selectedRows && this.props.selectedRows.indexOf(this.props.product.id)) >= 0}
                            onChange={(e) => this.props.toggleOne(e.target.checked, this.props.product.id)} />
                 </td>
-                <td>{this.props.product.name}</td>
+                <td>{this.props.product.department}</td>
+                <td>{this.props.product.toolname}</td>
+                <td>{this.props.product.productname}</td>
+                <td>{this.props.product.publishers}</td>
+                <td>{this.props.product.activities}</td>
                 <td>{this.props.product.description}</td>
-                <td>${parseFloat(this.props.product.price).toFixed(2)}</td>
-                <td>{this.props.product.category_name}</td>
                 {
                     (this.props.isLoggedIn == 'true')
                     ?
@@ -73,28 +75,40 @@ var ProductsTable = React.createClass({
                         <th className="text-center" style={{width:'1.5%'}}>
                             <input type="checkbox" onChange={this.props.toggleAll} />
                         </th>
-                        <th style={{width:'20%'}}>
-                            <a onClick={this.props.sortChanged.bind(null, 'p.name', this.props.orderType)}>
-                                Name
-                                <i className={this.props.sortClass('p.name')}></i>
+                        <th style={{width:'15%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'department', this.props.orderType)}>
+                            department
+                                <i className={this.props.sortClass('department')}></i>
                             </a>
                         </th>
-                        <th style={{width:'40%'}}>
+                        <th style={{width:'15%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'toolname', this.props.orderType)}>
+                            toolname
+                                <i className={this.props.sortClass('toolname')}></i>
+                            </a>
+                        </th>
+                        <th style={{width:'9%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'productname', this.props.orderType)}>
+                            productname
+                                <i className={this.props.sortClass('productname')}></i>
+                            </a>
+                        </th>
+                        <th style={{width:'15%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'publishers', this.props.orderType)}>
+                            publishers
+                                <i className={this.props.sortClass('publishers')}></i>
+                            </a>
+                        </th>
+                        <th style={{width:'25%'}}>
+                            <a onClick={this.props.sortChanged.bind(null, 'activities', this.props.orderType)}>
+                            activities
+                                <i className={this.props.sortClass('activities')}></i>
+                            </a>
+                        </th>
+                        <th style={{width:'25%'}}>
                             <a onClick={this.props.sortChanged.bind(null, 'description', this.props.orderType)}>
-                                Description
+                            description
                                 <i className={this.props.sortClass('description')}></i>
-                            </a>
-                        </th>
-                        <th style={{width:'9%'}}>
-                            <a onClick={this.props.sortChanged.bind(null, 'price', this.props.orderType)}>
-                                Price
-                                <i className={this.props.sortClass('price')}></i>
-                            </a>
-                        </th>
-                        <th style={{width:'9%'}}>
-                            <a onClick={this.props.sortChanged.bind(null, 'category_name', this.props.orderType)}>
-                                Category
-                                <i className={this.props.sortClass('category_name')}></i>
                             </a>
                         </th>
                         <th>Action</th>
@@ -469,10 +483,11 @@ var ReadProductsComponent = React.createClass({
 
     render: function() {
         var filteredProducts = this.state.products;
+        console.log(this.state.search);
         if(this.state.search != ''){
             $('.page-header h1').text('Search "'+ this.state.search +'"');
         }else{
-            $('.page-header h1').text('All Products');
+            $('.page-header h1').text('Master Tools');
         }
 
         return (

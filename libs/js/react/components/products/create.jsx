@@ -3,23 +3,18 @@
 var CreateProductComponent = React.createClass({
     getInitialState: function() {
         return {
-            categories: [],
-            selectedCategoryId: -1,
-            name: '',
+            publishers:'',
+            department: '',
+            toolname: '',
+            productname: '',
+            activities: '',
             description: '',
-            price: 0.00,
             successCreation: null,
             isLoggedIn: ''
         };
     },
 
     componentDidMount: function() {
-        this.serverRequest = $.get('api/read_all_categories.php', function(categories) {
-            this.setState({
-                categories: JSON.parse(categories)
-            });
-        }.bind(this));
-
         this.serverRequest = $.get('api/is_logged_in.php', function(result) {
             if(result == 'true')
                 this.setState({
@@ -37,44 +32,58 @@ var CreateProductComponent = React.createClass({
         this.serverRequest.abort();
     },
 
-    onCategoryChange: function(e) {
+    
+
+    ontoolnameChange: function(e) {
         this.setState({
-            selectedCategoryId: e.target.value
+            toolname: e.target.value
+        });
+    },
+
+    onPriceChCategoryChange: function(e) {
+        this.setState({
+            publishers: e.target.value
         });
     },
 
     onNameChange: function(e) {
         this.setState({
-            name: e.target.value
+            department: e.target.value
+        });
+    },ange: function(e) {
+        this.setState({
+            productname: e.target.value
         });
     },
-
-    onDescriptionChange: function(e) {
+    
+    onactivitiesChange: function(e) {
+        this.setState({
+            activities: e.target.value
+        });
+    },
+    ondescriptionChange: function(e) {
         this.setState({
             description: e.target.value
         });
     },
-
-    onPriceChange: function(e) {
-        this.setState({
-            price: e.target.value
-        });
-    },
-
     onSave: function(e) {
         $.post('api/create_product.php', {
-                name: this.state.name,
-                description: this.state.description,
-                category_id: this.state.selectedCategoryId,
-                price: this.state.price
+            department: this.state.department,
+            toolname: this.state.toolname,
+            publishers: this.state.publishers,
+                productname: this.state.productname,
+                activities: this.state.activities,
+                description: this.state.description
             },
             function(res) {
                 this.setState({successCreation: res});
                 if(res == 'true') {
-                    this.setState({name: ''});
+                    this.setState({department: ''});
+                    this.setState({toolname: ''});
+                    this.setState({publishers: ''});
+                    this.setState({productname: ''});
+                    this.setState({activities: ''});
                     this.setState({description: ''});
-                    this.setState({selectedCategoryId: -1});
-                    this.setState({price: 0.0});
                 }
             }.bind(this));
         e.preventDefault();
@@ -82,13 +91,6 @@ var CreateProductComponent = React.createClass({
 
     // THE FORM
     render: function() {
-
-        var categoriesOptions = this.state.categories.map(function(category) {
-            return (
-                <option key={category.id} value={category.id}>{category.name}</option>
-            );
-        });
-
         return (
             <div>
                 {
@@ -108,19 +110,19 @@ var CreateProductComponent = React.createClass({
 
                 <a href="#"
                    className="btn btn-primary margin-bottom-1em">
-                    All Products
+                    All Producssts
                 </a>
 
                 <form onSubmit={this.onSave}>
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>Name</td>
+                            <td>department</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    value={this.state.name}
+                                    value={this.state.department}
                                     required
                                     onChange={this.onNameChange}
                                 />
@@ -128,44 +130,62 @@ var CreateProductComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>Description</td>
+                            <td>toolname</td>
                             <td>
                                     <textarea
                                         className="form-control"
-                                        value={this.state.description}
+                                        value={this.state.toolname}
                                         required
-                                        onChange={this.onDescriptionChange}>
+                                        onChange={this.ontoolnameChange}>
                                     </textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Price ($)</td>
+                            <td>productname</td>
                             <td>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    className="form-control"
-                                    value={this.state.price}
-                                    required
-                                    onChange={this.onPriceChange}
-                                />
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.productname}
+                                        required
+                                        onChange={this.onPriceChange}>
+                                    </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>publishers</td>
+                            <td>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.publishers}
+                                        required
+                                        onChange={this.onCategoryChange}>
+                                    </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>activities</td>
+                            <td>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.activities}
+                                        required
+                                        onChange={this.onactivitiesChange}>
+                                    </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>description</td>
+                            <td>
+                                    <textarea
+                                        className="form-control"
+                                        value={this.state.description}
+                                        required
+                                        onChange={this.ondescriptionChange}>
+                                    </textarea>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>Category</td>
-                            <td>
-                                <select
-                                    onChange={this.onCategoryChange}
-                                    className="form-control"
-                                    value={this.state.selectedCategoryId}
-                                >
-                                    <option value="-1">Select category...</option>
-                                    {categoriesOptions}
-                                </select>
-                            </td>
-                        </tr>
 
                         <tr>
                             <td></td>

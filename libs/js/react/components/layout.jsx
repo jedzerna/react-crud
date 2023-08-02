@@ -46,7 +46,7 @@ var MainApp = React.createClass({
         var defaultItemPerPage = 5;
         var defaultSearchText = "";
         var defaultCurrentPage = 1;
-        var defaultOrderBy = 'p.name';
+        var defaultOrderBy = 'department';
         var defaultOrderType = 'asc';
 
         var currentMode = this.props.location[0] || 'read';
@@ -62,10 +62,10 @@ var MainApp = React.createClass({
 
         var productId = 0;
         var searchedTerm = '';
-        var sortColumn = 'p.name';
+        var sortColumn = 'department';
         var sortType = 'asc';
         var search = '';
-        var order_by = 'p.name';
+        var order_by = 'department';
         var order_type = 'asc';
         var item_per_page = defaultItemPerPage;
         var itemPerPage = defaultItemPerPage;

@@ -3,9 +3,9 @@ class Database{
 
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "react-crud";
+    private $db_name = "novatechdb";
     private $username = "root";
-    private $password = "secret";
+    private $password = "";
     public $conn;
 
     // get the database connection
