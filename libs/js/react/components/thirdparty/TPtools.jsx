@@ -105,7 +105,7 @@ var TPtoolsComponent = React.createClass({
               </a>
               <br />
               <a
-                href={"#delete?id=" + product.id}
+                href={"#TPdelete?id=" + product.id}
                 className="btn btn-danger"
                 style={{ width: "100px", margin: "5px" }}
               >

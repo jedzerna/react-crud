@@ -76,6 +76,8 @@ var MainApp = React.createClass({
     currentMode = currentMode.startsWith("register")
       ? currentMode.split("?")[0]
       : currentMode;
+      
+      currentMode = currentMode.startsWith('TPdelete') ? (currentMode.split('?'))[0] : currentMode;
 
     var productId = 0;
     var searchedTerm = "";
@@ -160,6 +162,10 @@ var MainApp = React.createClass({
         break;
       case "TPshow":
         modeComponent = <TPshowComponent />;
+        break;
+      case "TPdelete":
+        productId = (this.props.location[0].split('?')[1]).split('=')[1];
+        modeComponent = <TPdeleteComponent productId={productId}  />;
         break;
       case "register":
         modeComponent = <RegisterComponent />;
