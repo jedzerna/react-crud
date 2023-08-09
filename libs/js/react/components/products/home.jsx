@@ -68,24 +68,24 @@ var HomeComponent = React.createClass({
             {
                 (this.state.isLoggedIn == 'false') ?
                         <td style={{width:'120px'}}>
-                            <a href={'#show?id='+product.id}
+                            <a href={'#?id='+product.id}
                                className="btn btn-info m-r-2em"  style={{width:'100px',margin:'5px'}}>
                                 Read
                             </a>
                             <br/>
-                            <a href={'#update?id='+product.id}
+                            <a href={'#?id='+product.id}
                                className="btn btn-primary m-r-1em"  style={{width:'100px',margin:'5px'}}> 
                                 Edit
                             </a>
                         </td>
                     :
                     <td style={{width:'120px'}}>
-                            <a href={'#show?id='+product.id}
+                            <a href={'#?id='+product.id}
                                className="btn btn-info m-r-1em" style={{width:'100px',margin:'5px'}}>
                                 Read
                             </a>
                             <br/>
-                            <a href={'#update?id='+product.id}
+                            <a href={'#?id='+product.id}
                                className="btn btn-primary m-r-1em"  style={{width:'100px',margin:'5px'}}> 
                                 Edit
                             </a>
