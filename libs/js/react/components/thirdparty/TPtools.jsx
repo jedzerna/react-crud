@@ -79,7 +79,7 @@ var TPtoolsComponent = React.createClass({
               </a>
               <br />
               <a
-                href={"#update?id=" + product.id}
+                href={"#TPedit?id=" + product.id}
                 className="btn btn-primary m-r-1em"
                 style={{ width: "100px", margin: "5px" }}
               >

@@ -23,6 +23,7 @@ var TPeditComponent = React.createClass({
             function(product) {
                 var p = JSON.parse(product)[0];
                 this.setState({Team: p.Team});
+                this.setState({id: p.id});
                 this.setState({Purpose: p.Purpose});
                 this.setState({SoftwareName: p.SoftwareName});
                 this.setState({Details: p.Details});
