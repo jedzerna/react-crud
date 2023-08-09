@@ -28,8 +28,6 @@ if($_POST){
         $result = "The Details must be selected.";
     } else if(is_null($_POST['License']) || empty($_POST['License'])) {
         $result = "The License must be filled.";
-    } else if(is_null($_POST['site']) || empty($_POST['site'])) {
-        $result = "The site must be filled.";
     } else {
         $ThirdParty->Team = $_POST['Team'];
         $ThirdParty->Purpose = $_POST['Purpose'];

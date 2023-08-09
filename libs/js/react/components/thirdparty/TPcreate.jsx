@@ -145,7 +145,7 @@ var TPcreateComponent = React.createClass({
                         </tr>
 
                         <tr>
-                            <td>SoftwareName</td>
+                            <td>Software Name</td>
                             <td>
                                 <input
                                         className="form-control"
@@ -178,7 +178,7 @@ var TPcreateComponent = React.createClass({
                             </td>
                         </tr>
                         <tr>
-                            <td>site</td>
+                            <td>Site</td>
                             <td>
                                     <textarea
                                         className="form-control"
