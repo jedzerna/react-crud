@@ -1,6 +1,6 @@
 "use strict";
 
-var ReadOneProductComponent = React.createClass({
+var TPshowComponent = React.createClass({
   getInitialState: function () {
     return {
       id: 0,
@@ -21,6 +21,7 @@ var ReadOneProductComponent = React.createClass({
       { prod_id: productId },
       function (product) {
         var p = JSON.parse(product)[0];
+        console.log(p);
         this.setState({ publishers: p.publishers });
         this.setState({ id: p.id });
         this.setState({ department: p.department });
