@@ -80,7 +80,7 @@ var HomeComponent = React.createClass({
                         </td>
                     :
                     <td style={{width:'120px'}}>
-                            <a href={'#?id='+product.id}
+                            <a href={'#show?id='+product.id}
                                className="btn btn-info m-r-1em" style={{width:'100px',margin:'5px'}}>
                                 Read
                             </a>
