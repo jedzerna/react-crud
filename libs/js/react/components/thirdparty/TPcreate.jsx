@@ -82,7 +82,7 @@ var TPcreateComponent = React.createClass({
                 this.setState({successCreation: res});
                 if(res == 'true') {
                     this.setState({Team: ''});
-                    this.setState({toolname: ''});
+                    this.setState({Purpose: ''});
                     this.setState({SoftwareName: ''});
                     this.setState({Details: ''});
                     this.setState({License: ''});
