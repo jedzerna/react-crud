@@ -3,33 +3,29 @@
 var TPshowComponent = React.createClass({
   getInitialState: function () {
     return {
-      id: 0,
-      department: "",
-      toolname: "",
-      productname: "",
-      publishers: "",
-      activities: "",
-      description: "",
+      Team: "",
+      Purpose: "",
+      SoftwareName: "",
+      Details: "",
+      License: "",
+      site: null,
     };
   },
 
   componentDidMount: function () {
     var productId = this.props.productId;
-
     this.serverRequestProd = $.post(
-      "api/read_one_product.php",
+      "api/read_one_thirdparty.php",
       { prod_id: productId },
       function (product) {
         var p = JSON.parse(product)[0];
-        console.log(p);
-        this.setState({ publishers: p.publishers });
-        this.setState({ id: p.id });
-        this.setState({ department: p.department });
-        this.setState({ toolname: p.toolname });
-        this.setState({ productname: p.productname });
-        this.setState({ activities: p.activities });
-        this.setState({ description: p.description });
-        $(".page-header h1").text(p.department);
+        this.setState({ Team: p.Team });
+        this.setState({ Purpose: p.Purpose });
+        this.setState({ SoftwareName: p.SoftwareName });
+        this.setState({ Details: p.Details });
+        this.setState({ License: p.License });
+        this.setState({ site: p.site });
+        $(".page-header h1").text(p.Team);
       }.bind(this)
     );
   },
@@ -41,35 +37,35 @@ var TPshowComponent = React.createClass({
   render: function () {
     return (
       <div>
-        <a href="#" className="btn btn-primary margin-bottom-1em">
-          All Products
+        <a href="#TTools" className="btn btn-primary margin-bottom-1em">
+          All Tools
         </a>
 
         <table className="table table-bordered table-responsive">
           <tbody>
             <tr>
-              <td>Department</td>
-              <td>{this.state.department}</td>
+              <td>Team</td>
+              <td>{this.state.Team}</td>
             </tr>
             <tr>
-              <td>Tool Name</td>
-              <td>{this.state.toolname}</td>
+              <td>Purpose</td>
+              <td>{this.state.Purpose}</td>
             </tr>
             <tr>
-              <td>Product Name</td>
-              <td>{this.state.productname}</td>
+              <td>Software Name</td>
+              <td>{this.state.SoftwareName}</td>
             </tr>
             <tr>
-              <td>Publishers</td>
-              <td>{this.state.publishers}</td>
+              <td>Details</td>
+              <td>{this.state.Details}</td>
             </tr>
             <tr>
-              <td>Activities</td>
-              <td>{this.state.activities}</td>
+              <td>License</td>
+              <td>{this.state.License}</td>
             </tr>
             <tr>
-              <td>Descriptions</td>
-              <td>{this.state.description}</td>
+              <td>Site</td>
+              <td>{this.state.site}</td>
             </tr>
           </tbody>
         </table>

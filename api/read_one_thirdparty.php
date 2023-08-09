@@ -14,8 +14,8 @@ $db = $database->getConnection();
 $ThirdParty = new ThirdParty($db);
 
 // read all products
-$ThirdParty->id=$_POST['prod_id'];
-$results=$ThirdParty->readOne();
+$ThirdParty->id = $_POST['prod_id'];
+$results = $ThirdParty->readOne();
 
 // output in json format
 echo $results;
