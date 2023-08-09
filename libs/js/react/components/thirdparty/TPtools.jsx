@@ -87,6 +87,7 @@ var TPtoolsComponent = React.createClass({
               </a>
             </td>
           ) : (
+            // This is the one
             <td style={{ width: "120px" }}>
               <a
                 href={"#TPshow?id=" + product.id}
