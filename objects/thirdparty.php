@@ -76,6 +76,27 @@ class ThirdParty{
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return json_encode($products);
+    }  
+    
+    public function delete($ins){
+
+        // query to delete multiple records
+        //$query = "DELETE FROM products WHERE id IN (:ins)";
+
+        // sanitize
+        $ins=htmlspecialchars(strip_tags($ins));
+
+        // bind the parameter
+        //$stmt->bindParam(':ins', $ins);
+        $query = "DELETE FROM thirdparty WHERE id IN ($ins)";
+        //return $query;
+        $stmt = $this->conn->prepare($query);
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

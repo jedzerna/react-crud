@@ -77,6 +77,11 @@ var HomeComponent = React.createClass({
                                className="btn btn-primary m-r-1em"  style={{width:'100px',margin:'5px'}}> 
                                 Edit
                             </a>
+                            <br/>
+                            <a href={'#TPdelete?id='+product.id}
+                               className="btn btn-danger"  style={{width:'100px',margin:'5px'}}>
+                                Delete
+                            </a>
                         </td>
                     :
                     <td style={{width:'120px'}}>
@@ -90,7 +95,7 @@ var HomeComponent = React.createClass({
                                 Edit
                             </a>
                             <br/>
-                            <a href={'#delete?id='+product.id}
+                            <a href={'#TPdelete?id='+product.id}
                                className="btn btn-danger"  style={{width:'100px',margin:'5px'}}>
                                 Delete
                             </a>
