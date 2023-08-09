@@ -61,7 +61,6 @@ var TPtoolsComponent = React.createClass({
     return displayedProducts.map((product, index) => {
       return (
         <tr key={index}>
-          <td>{product.id}</td>
           <td>{product.Team}</td>
           <td>{product.Purpose}</td>
           <td>{product.SoftwareName}</td>
@@ -213,13 +212,12 @@ var TPtoolsComponent = React.createClass({
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-              <th>S.NO.</th>
-              <th>Team</th>
-              <th>Purpose</th>
-              <th>Software Name</th>
-              <th>Details</th>
-              <th>License</th>
-              <th>site</th>
+              <th  style={{ width: "15%" }}>Team</th>
+              <th  style={{ width: "15%" }}>Purpose</th>
+              <th style={{ width: "20%" }}>Software Name</th>
+              <th style={{ width: "15%" }}>Details</th>
+              <th style={{ width: "15%" }}>License</th>
+              <th style={{ width: "25%" }}>site</th>
               <th>Actions</th>
               {/* Add more table headers for other columns */}
             </tr>

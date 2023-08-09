@@ -108,7 +108,7 @@ var TPeditComponent = React.createClass({
                         : null
                 }
 
-                <a href="#"
+                <a href="#TTools"
                    className="btn btn-primary margin-bottom-1em"
                 >
                     All Tools
