@@ -36,8 +36,12 @@ var ProductRow = React.createClass({
                     :
                         <td>
                             <a href={'#show?id='+this.props.product.id}
-                               className="btn btn-info m-r-1em">
+                               className="btn btn-info m-r-1em" style={{width:'100px',margin:'5px'}}>
                                 Read
+                            </a>
+                            <a href={'#update?id='+this.props.product.id}
+                               className="btn btn-primary m-r-1em"  style={{width:'100px',margin:'5px'}}> 
+                                Edit
                             </a>
                         </td>
                 }
@@ -127,19 +131,24 @@ var SearchByName = React.createClass({
     render: function() {
         return (
             <form role="search" action='#'>
-                <div className="input-group col-md-3 margin-bottom-1em pull-left">
+                <div className="input-group col-md-5 margin-bottom-1em pull-left">
                     <input
                         type="text"
                         className="form-control searchbox"
-                        placeholder="Type a name..."
+                        placeholder="Type a department..."
                         required
                         onChange={this.props.onInputSearchChange} value={this.props.searchText} />
-                    <div className="input-group-btn">
+                    <div className="input-group-btn" style={{paddingRight:'10px'}}>
                         <button className="btn btn-primary" onClick={this.props.searchTerm}>
                             Search
                         </button>
                     </div>
-                </div>
+                    
+                <a href="#create" className="btn btn-primary" >
+                                <span className='glyphicon glyphicon-plus'></span>&nbsp;
+                                Create Product
+                 </a>
+                </div> 
             </form>
         );
     }
@@ -155,10 +164,7 @@ var TopActionsComponent = React.createClass({
                     (this.props.isLoggedIn == 'true')
                     ?
                         <div>
-                            <a href="#create" className="btn btn-primary margin-bottom-1em pull-right" >
-                                <span className='glyphicon glyphicon-plus'></span>&nbsp;
-                                Create Product
-                            </a>
+                        
 
                             <button className="btn btn-danger margin-bottom-1em pull-right" onClick={this.props.deleteSelected} style={{marginRight:'10px'}}>
                                 <span className='glyphicon glyphicon-trash'></span>&nbsp;
@@ -269,7 +275,7 @@ var PaginationComponent = React.createClass({
                             </div>
                         </div>
 
-                        <div className="input-group col-md-3 pull-right" style={{marginRight:'10px'}}>
+                        <div className="input-group col-md-3 pull-right">
                             <select value={this.props.productsPerPage} name="" className="form-control" onChange={this.props.itemPerPageChanged}>
                                 <option value="5">Show 5 Products per page</option>
                                 <option value="10">Show 10 Products per page</option>

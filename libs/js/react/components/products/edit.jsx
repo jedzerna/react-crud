@@ -10,8 +10,7 @@ var UpdateProductComponent = React.createClass({
             publishers: '',
             activities: '',
             description: '',
-            successUpdate: null,
-            isLoggedIn: ''
+            successUpdate: null
         };
     },
 
@@ -34,18 +33,18 @@ var UpdateProductComponent = React.createClass({
                 $('.page-header h1').text(p.department);
             }.bind(this));
 
-        this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-            if(result == 'true')
-                this.setState({
-                    isLoggedIn: result
-                });
-            else
-                window.location.href = '#';
-        }.bind(this));
+        // this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+        //     // if(result == 'true')
+        //     //     this.setState({
+        //     //         isLoggedIn: result
+        //     //     });
+        //     // else
+        //     //     window.location.href = '#';
+        // }.bind(this));
     },
 
     componentWillUnmount: function() {
-        this.serverRequest.abort();
+        // this.serverRequest.abort();
         //this.serverRequestCat.abort();
         this.serverRequestProd.abort();
     },
@@ -133,40 +132,44 @@ var UpdateProductComponent = React.createClass({
                         <tr>
                             <td>Tool Name</td>
                             <td>
-                                    <textarea
+                                <input
+                                    type="text"
                                         className="form-control"
                                         value={this.state.toolname}
-                                        onChange={this.ontoolnameChange}></textarea>
+                                        onChange={this.ontoolnameChange} />
                             </td>
                         </tr>
 
                         <tr>
                             <td>Product Name</td>
                             <td>
-                                    <textarea
+                                <input
+                                    type="text"
                                         className="form-control"
                                         value={this.state.productname}
-                                        onChange={this.onproductnameChange}></textarea>
+                                        onChange={this.onproductnameChange} />
                             </td>
                         </tr>
 
                         <tr>
                             <td>Publisher</td>
                             <td>
-                                    <textarea
+                                <input
+                                    type="text"
                                         className="form-control"
                                         value={this.state.publishers}
-                                        onChange={this.onpublishersChange}></textarea>
+                                        onChange={this.onpublishersChange}/>
                             </td>
                         </tr>
 
                         <tr>
                             <td>Activies</td>
                             <td>
-                                    <textarea
+                                <input
+                                    type="text"
                                         className="form-control"
                                         value={this.state.activities}
-                                        onChange={this.onactivitiesChange}></textarea>
+                                        onChange={this.onactivitiesChange}/>
                             </td>
                         </tr>
                         

@@ -58,6 +58,7 @@ var MainApp = React.createClass({
         currentMode = currentMode.startsWith('show') ? (currentMode.split('?'))[0] : currentMode;
         currentMode = currentMode.startsWith('delete') ? (currentMode.split('?'))[0] : currentMode;
         currentMode = currentMode.startsWith('login') ? (currentMode.split('?'))[0] : currentMode;
+        currentMode = currentMode.startsWith('home') ? (currentMode.split('?'))[0] : currentMode;
         currentMode = currentMode.startsWith('register') ? (currentMode.split('?'))[0] : currentMode;
 
         var productId = 0;
@@ -115,6 +116,14 @@ var MainApp = React.createClass({
                 break;
             case 'login':
                 modeComponent = <LoginComponent />;
+                break;
+            case 'TTools':
+               
+            modeComponent = <HomeComponent />;
+                
+                break;
+            case 'TPcreate':
+                modeComponent = <TPcreateComponent />;
                 break;
             case 'register':
                 modeComponent = <RegisterComponent />;

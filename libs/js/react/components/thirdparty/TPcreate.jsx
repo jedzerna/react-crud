@@ -1,15 +1,15 @@
 "use strict";
 
-var CreateProductComponent = React.createClass({
+var TPcreateComponent = React.createClass({
     getInitialState: function() {
         return {
-            publishers:'',
-            department: '',
-            toolname: '',
-            productname: '',
-            activities: '',
+            Team:'',
+            Purpose: '',
+            SoftwareName: '',
+            Details: '',
+            License: '',
             description: '',
-            successCreation: null
+            site: null
         };
     },
 
@@ -24,7 +24,7 @@ var CreateProductComponent = React.createClass({
 
         }.bind(this));
 
-        $('.page-header h1').text('Create product');
+        $('.page-header h1').text('Create Third Party Tool');
     },
 
     componentWillUnmount: function() {
@@ -33,60 +33,60 @@ var CreateProductComponent = React.createClass({
 
     
 
-    ondepartmentChange: function(e) {
+    onTeamChange: function(e) {
         this.setState({
-            department: e.target.value
+            Team: e.target.value
         });
     },
 
-    ontoolnameChange: function(e) {
+    onPurposeChange: function(e) {
         this.setState({
-            toolname: e.target.value
+            Purpose: e.target.value
         });
     },
 
-    onproductnameChange: function(e) {
+    onSoftwareNameChange: function(e) {
         this.setState({
-            productname: e.target.value
+            SoftwareName: e.target.value
         });
     },
 
-    onpublishersChange: function(e) {
+    onDetailsChange: function(e) {
         this.setState({
-            publishers: e.target.value
+            Details: e.target.value
         });
     },
 
     
     
-    onactivitiesChange: function(e) {
+    onLicenseChange: function(e) {
         this.setState({
-            activities: e.target.value
+            License: e.target.value
         });
     },
-    ondescriptionChange: function(e) {
+    onsiteChange: function(e) {
         this.setState({
-            description: e.target.value
+            site: e.target.value
         });
     },
     onSave: function(e) {
-        $.post('api/create_product.php', {
-            department: this.state.department,
-            toolname: this.state.toolname,
-            publishers: this.state.publishers,
-                productname: this.state.productname,
-                activities: this.state.activities,
-                description: this.state.description
+        $.post('api/create_thirdparty.php', {
+            Team: this.state.Team,
+            Purpose: this.state.Purpose,
+            SoftwareName: this.state.SoftwareName,
+            Details: this.state.Details,
+            License: this.state.License,
+            site: this.state.site
             },
             function(res) {
                 this.setState({successCreation: res});
                 if(res == 'true') {
-                    this.setState({department: ''});
+                    this.setState({Team: ''});
                     this.setState({toolname: ''});
-                    this.setState({publishers: ''});
-                    this.setState({productname: ''});
-                    this.setState({activities: ''});
-                    this.setState({description: ''});
+                    this.setState({SoftwareName: ''});
+                    this.setState({Details: ''});
+                    this.setState({License: ''});
+                    this.setState({site: ''});
                 }
             }.bind(this));
         e.preventDefault();
@@ -99,7 +99,7 @@ var CreateProductComponent = React.createClass({
                 {
                     this.state.successCreation == "true" ?
                         <div className="alert alert-success">
-                            Product was saved.
+                            Tool was saved.
                         </div>
                         : null
                 }
@@ -111,80 +111,80 @@ var CreateProductComponent = React.createClass({
                         : null
                 }
 
-                <a href="#"
+                <a href="#TTools"
                    className="btn btn-primary margin-bottom-1em">
-                    All Products
+                    All Tools
                 </a>
 
                 <form onSubmit={this.onSave}>
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>Department</td>
+                            <td>Team</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    value={this.state.department}
+                                    value={this.state.Team}
                                     required
-                                    onChange={this.ondepartmentChange}
+                                    onChange={this.onTeamChange}
                                 />
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Tool Name</td>
+                            <td>Purpose</td>
                             <td>
                                 <input
                                         className="form-control"
-                                        value={this.state.toolname}
+                                        value={this.state.Purpose}
                                         required
-                                        onChange={this.ontoolnameChange}
+                                        onChange={this.onPurposeChange}
                                        />
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Product Name</td>
+                            <td>SoftwareName</td>
                             <td>
                                 <input
                                         className="form-control"
-                                        value={this.state.productname}
+                                        value={this.state.SoftwareName}
                                         required
-                                        onChange={this.onproductnameChange}
+                                        onChange={this.onSoftwareNameChange}
                                         />
                             </td>
                         </tr>
                         <tr>
-                            <td>Publisher</td>
+                            <td>Details</td>
                             <td>
                                 <input
                                         className="form-control"
-                                        value={this.state.publishers}
+                                        value={this.state.Details}
                                         required
-                                        onChange={this.onpublishersChange}
+                                        onChange={this.onDetailsChange}
                                         />
                             </td>
                         </tr>
                         <tr>
-                            <td>Activities</td>
+                            <td>License</td>
                             <td>
                                 <input
                                         className="form-control"
-                                        value={this.state.activities}
+                                        value={this.state.License}
                                         required
-                                        onChange={this.onactivitiesChange}
+                                        onChange={this.onLicenseChange}
                                         />
                             </td>
                         </tr>
                         <tr>
-                            <td>Descriptions</td>
+                            <td>site</td>
                             <td>
                                     <textarea
                                         className="form-control"
-                                        value={this.state.description}
+                                        value={this.state.site}
                                         required
-                                        onChange={this.ondescriptionChange}>
+                                        onChange={this.onsiteChange}>
                                     </textarea>
                             </td>
                         </tr>
