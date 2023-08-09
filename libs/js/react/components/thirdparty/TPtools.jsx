@@ -1,6 +1,6 @@
 "use strict";
 
-var HomeComponent = React.createClass({
+var TPtoolsComponent = React.createClass({
   getInitialState: function () {
     return {
       products: [],
@@ -37,7 +37,6 @@ var HomeComponent = React.createClass({
         }
       }.bind(this)
     );
-    console.log(this.serverRequest);
   },
 
   handleSearchChange: function (event) {
@@ -90,7 +89,7 @@ var HomeComponent = React.createClass({
           ) : (
             <td style={{ width: "120px" }}>
               <a
-                href={"#show?id=" + product.id}
+                href={"#TPshow?id=" + product.id}
                 className="btn btn-info m-r-1em"
                 style={{ width: "100px", margin: "5px" }}
               >
@@ -149,6 +148,7 @@ var HomeComponent = React.createClass({
             className="form-control"
             value={this.state.itemsPerPage}
             onChange={this.handleItemsPerPageChange}
+            title="Items per page"
           >
             <option value="5">Show 5 Products per page</option>
             <option value="10">Show 10 Products per page</option>
