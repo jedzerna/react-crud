@@ -70,7 +70,7 @@ var TPtoolsComponent = React.createClass({
           {this.state.isLoggedIn == "false" ? (
             <td style={{ width: "120px" }}>
               <a
-                href={"#show?id=" + product.id}
+                href={"#TPshow?id=" + product.id}
                 className="btn btn-info m-r-2em"
                 style={{ width: "100px", margin: "5px" }}
               >
