@@ -92,7 +92,7 @@ var TPeditComponent = React.createClass({
           <div className="alert alert-danger">{this.state.successUpdate}</div>
         ) : null}
 
-        <a href="#" className="btn btn-primary margin-bottom-1em">
+        <a href="#TTools" className="btn btn-primary margin-bottom-1em">
           All Tools
         </a>
         <form onSubmit={this.onSave}>
