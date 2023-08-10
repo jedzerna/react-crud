@@ -1,4 +1,4 @@
-"use strict";
+
 
 var RegisterComponent = React.createClass({
     getInitialState: function() {
@@ -88,8 +88,8 @@ var RegisterComponent = React.createClass({
                         <input type="email" className="form-control" placeholder="Email address" name="email" value={this.state.email} onChange={this.onEmailChanged} />
 
                         <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.onPasswordChanged} />
-
                         <input type="password" className="form-control" placeholder="Confirm Password" name="password_confirmation" value={this.state.passwordConfirmation} onChange={this.onConfirmPasswordChanged} />
+
 
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>Sign up</button>
                     </form>

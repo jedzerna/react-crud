@@ -3,14 +3,16 @@ class Product{
 
     // database connection and table name
     private $conn;
-    private $table_name = "products";
+    private $table_name = "mastertools";
 
     // object properties
     public $id;
-    public $name;
-    public $price;
+    public $department;
+    public $toolname;
+    public $productname;
+    public $publishers;
+    public $activities;
     public $description;
-    public $category_id;
     public $timestamp;
 
     public function __construct($db){
@@ -21,28 +23,32 @@ class Product{
         try{
 
             // insert query
-            $query = "INSERT INTO products
-                SET name=:name, description=:description, price=:price, category_id=:category_id, created=:created";
+            $query = "INSERT INTO mastertools
+                SET department=:department, toolname=:toolname, productname=:productname, publishers=:publishers, activities=:activities, description=:description";
 
             // prepare query for execution
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $name=htmlspecialchars(strip_tags($this->name));
+            $department=htmlspecialchars(strip_tags($this->department));
+            $toolname=htmlspecialchars(strip_tags($this->toolname));
+            $productname=htmlspecialchars(strip_tags($this->productname));
+            $publishers=htmlspecialchars(strip_tags($this->publishers));
+            $activities=htmlspecialchars(strip_tags($this->activities));
             $description=htmlspecialchars(strip_tags($this->description));
-            $price=htmlspecialchars(strip_tags($this->price));
-            $category_id=htmlspecialchars(strip_tags($this->category_id));
 
             // bind the parameters
-            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':department', $department);
+            $stmt->bindParam(':toolname', $toolname);
+            $stmt->bindParam(':productname', $productname);
+            $stmt->bindParam(':publishers', $publishers);
+            $stmt->bindParam(':activities', $activities);
             $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':price', $price);
-            $stmt->bindParam(':category_id', $category_id);
 
             // we need the created variable to know when the record was created
             // also, to comply with strict standards: only variables should be passed by reference
-            $created=date('Y-m-d H:i:s');
-            $stmt->bindParam(':created', $created);
+            //$created=date('Y-m-d H:i:s');
+            //$stmt->bindParam(':created', $created);
 
             // Execute the query
             if($stmt->execute()){
@@ -59,27 +65,27 @@ class Product{
         }
     }
 
-    public function paginate($where = '', $page = 1, $limit = 10, $orderBy = 'p.name', $orderType = 'asc') {
-        $query = "SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name
-              FROM ". $this->table_name ." p LEFT JOIN categories c ON p.category_id = c.id
-              WHERE p.name LIKE :where
+    public function paginate($where = '', $page = 1, $limit = 10, $orderBy = 'department', $orderType = 'asc') {
+        $query = "SELECT id, department, toolname, productname, publishers, activities, description 
+              FROM ". $this->table_name ." 
+              WHERE department LIKE :where
               ORDER BY " . $orderBy . " " . $orderType . "
               LIMIT ". ($page - 1) * $limit ."," . $limit . "
               ";
-
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':where', $where);
         $stmt->execute();
 
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+       // echo $where;
         return json_encode($products);
     }
 
     public function count($where = '') {
-        $query = "SELECT p.id
-              FROM ". $this->table_name ." p LEFT JOIN categories c ON p.category_id = c.id
-              WHERE p.name LIKE :where
+        $query = "SELECT id
+              FROM ". $this->table_name ." p
+              WHERE department LIKE :where
               ";
 
         $stmt = $this->conn->prepare($query);
@@ -94,8 +100,8 @@ class Product{
     public function readAll(){
 
         //select all data
-        $query = "SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name
-              FROM ". $this->table_name ." p LEFT JOIN categories c ON p.category_id = c.id ORDER BY name";
+        $query = "SELECT id, department, toolname, productname, publishers, activities, description 
+              FROM ". $this->table_name ." ORDER BY department";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -105,11 +111,12 @@ class Product{
         return json_encode($products);
     }
 
+ 
     public function readOne(){
 
         // select one record
-        $query = "SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name
-                    FROM " . $this->table_name . " p LEFT JOIN categories c ON p.category_id=c.id
+        $query = "SELECT p.id, p.department, p.toolname, p.productname, p.publishers, p.activities, p.description
+                    FROM " . $this->table_name . " p
                     WHERE p.id=:id";
 
         //prepare query for execution
@@ -126,25 +133,29 @@ class Product{
 
     public function update(){
 
-        $query = "UPDATE products
-                SET name=:name, description=:description, price=:price, category_id=:category_id
+        $query = "UPDATE mastertools
+                SET department=:department, toolname=:toolname, productname=:productname, publishers=:publishers, activities=:activities, description=:description
                 WHERE id=:id";
 
         //prepare query for excecution
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $name=htmlspecialchars(strip_tags($this->name));
+        $department=htmlspecialchars(strip_tags($this->department));
+        $toolname=htmlspecialchars(strip_tags($this->toolname));
+        $productname=htmlspecialchars(strip_tags($this->productname));
+        $publishers=htmlspecialchars(strip_tags($this->publishers));
+        $activities=htmlspecialchars(strip_tags($this->activities));
         $description=htmlspecialchars(strip_tags($this->description));
-        $price=htmlspecialchars(strip_tags($this->price));
-        $category_id=htmlspecialchars(strip_tags($this->category_id));
         $id=htmlspecialchars(strip_tags($this->id));
 
         // bind the parameters
-        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':department', $department);
+        $stmt->bindParam(':toolname', $toolname);
+        $stmt->bindParam(':productname', $productname);
+        $stmt->bindParam(':publishers', $publishers);
+        $stmt->bindParam(':activities', $activities);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':price', $price);
-        $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(':id', $id);
 
         // execute the query
@@ -166,7 +177,7 @@ class Product{
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);
-        $query = "DELETE FROM products WHERE id IN ($ins)";
+        $query = "DELETE FROM mastertools WHERE id IN ($ins)";
         //return $query;
         $stmt = $this->conn->prepare($query);
 

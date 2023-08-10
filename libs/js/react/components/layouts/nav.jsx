@@ -51,6 +51,7 @@ var NavComponent = React.createClass({
                         <div id="navbar" className="collapse navbar-collapse">
                             <ul className="nav navbar-nav">
                                 <li><a href="#">Home</a></li>
+                                <li><a href="#TTools">Third Part Tools</a></li>
                                 <li><a href="#login">Sign In</a></li>
                                 <li><a href="#register">Sign Up</a></li>
                             </ul>
@@ -63,6 +64,7 @@ var NavComponent = React.createClass({
                         <div id="navbar" className="collapse navbar-collapse">
                             <ul className="nav navbar-nav">
                                 <li><a href="#">Home</a></li>
+                                <li><a href="#TTools">Third Part Tools</a></li>
                                 {
                                     (this.state.user != '') ?
                                     <li><a>Welcome, {this.state.user.email}</a></li>

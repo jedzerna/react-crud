@@ -1,0 +1,6 @@
+SELECT id, department, toolname, productname, publishers, activities, description 
+              FROM mastertools 
+              WHERE department LIKE :where
+              ORDER BY department asc
+              LIMIT 0,5
+              

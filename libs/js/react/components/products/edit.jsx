@@ -4,92 +4,94 @@ var UpdateProductComponent = React.createClass({
     getInitialState:function() {
         return {
             id: 0,
-            name: '',
+            department: '',
+            toolname: '',
+            productname: '',
+            publishers: '',
+            activities: '',
             description: '',
-            price: 0,
-            selectedCategoryId: 0,
-            categories: [],
-            successUpdate: null,
-            isLoggedIn: ''
+            successUpdate: null
         };
     },
 
     componentDidMount: function() {
         var productId = this.props.productId;
 
-        // Populate categories drop down list
-        this.serverRequestCat = $.get('api/read_all_categories.php', function(categories) {
-            this.setState({
-                categories: JSON.parse(categories)
-            });
-        }.bind(this));
 
         // load form values
         this.serverRequestProd = $.post('api/read_one_product.php',
             {prod_id: productId},
             function(product) {
                 var p = JSON.parse(product)[0];
-                this.setState({selectedCategoryId: p.category_id});
+                this.setState({publishers: p.publishers});
                 this.setState({id: p.id});
-                this.setState({name: p.name});
-                this.setState({price: p.price});
+                this.setState({department: p.department});
+                this.setState({productname: p.productname});
+                this.setState({toolname: p.toolname});
+                this.setState({activities: p.activities});
                 this.setState({description: p.description});
-                $('.page-header h1').text(p.name);
+                $('.page-header h1').text(p.department);
             }.bind(this));
 
-        this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-            if(result == 'true')
-                this.setState({
-                    isLoggedIn: result
-                });
-            else
-                window.location.href = '#';
-        }.bind(this));
+        // this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+        //     // if(result == 'true')
+        //     //     this.setState({
+        //     //         isLoggedIn: result
+        //     //     });
+        //     // else
+        //     //     window.location.href = '#';
+        // }.bind(this));
     },
 
     componentWillUnmount: function() {
-        this.serverRequest.abort();
-        this.serverRequestCat.abort();
+        // this.serverRequest.abort();
+        //this.serverRequestCat.abort();
         this.serverRequestProd.abort();
     },
 
-    onNameChange: function(e) {
-        this.setState({name: e.target.value});
+    ondepartmentChange: function(e) {
+        this.setState({department: e.target.value});
     },
 
-    onCategoryChange: function(e) {
-        this.setState({selectedCategoryId: e.target.value});
+    onpublishersChange: function(e) {
+        this.setState({publishers: e.target.value});
     },
 
-    onDescriptionChange: function(e) {
+    ontoolnameChange: function(e) {
+        this.setState({toolname: e.target.value});
+    },
+
+    onproductnameChange: function(e) {
+        this.setState({productname: e.target.value});
+    },
+    onactivitiesChange: function(e) {
+        this.setState({activities: e.target.value});
+    },
+
+    ondescriptionChange: function(e) {
         this.setState({description: e.target.value});
     },
 
-    onPriceChange: function(e) {
-        this.setState({price: e.target.value});
-    },
 
     onSave: function(e) {
         $.post('api/update_product.php', {
                 id: this.state.id,
-                name: this.state.name,
-                description: this.state.description,
-                price: this.state.price,
-                category_id: this.state.selectedCategoryId
+                department: this.state.department,
+                toolname: this.state.toolname,
+                productname: this.state.productname,
+                publishers: this.state.publishers,
+                activities: this.state.activities,
+                description: this.state.description
             },
             function(res) {
                 this.setState({successUpdate: res});
-            }.bind(this));
+            }.bind(this)
+            );
         e.preventDefault();
     },
 
     render: function() {
-        var categoriesOptions = this.state.categories.map(function(category) {
-            return (
-                <option key={category.id} value={category.id}>{category.name}</option>
-            );
-        });
-
+       
         return (
             <div>
                 {
@@ -116,54 +118,70 @@ var UpdateProductComponent = React.createClass({
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
-                            <td>Name</td>
+                            <td>Department</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    value={this.state.name}
-                                    onChange={this.onNameChange}
+                                    value={this.state.department}
+                                    onChange={this.ondepartmentChange}
                                 />
                             </td>
                         </tr>
 
+                        <tr>
+                            <td>Tool Name</td>
+                            <td>
+                                <input
+                                    type="text"
+                                        className="form-control"
+                                        value={this.state.toolname}
+                                        onChange={this.ontoolnameChange} />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Product Name</td>
+                            <td>
+                                <input
+                                    type="text"
+                                        className="form-control"
+                                        value={this.state.productname}
+                                        onChange={this.onproductnameChange} />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Publisher</td>
+                            <td>
+                                <input
+                                    type="text"
+                                        className="form-control"
+                                        value={this.state.publishers}
+                                        onChange={this.onpublishersChange}/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Activies</td>
+                            <td>
+                                <input
+                                    type="text"
+                                        className="form-control"
+                                        value={this.state.activities}
+                                        onChange={this.onactivitiesChange}/>
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td>Description</td>
                             <td>
                                     <textarea
                                         className="form-control"
                                         value={this.state.description}
-                                        onChange={this.onDescriptionChange}></textarea>
+                                        onChange={this.ondescriptionChange}></textarea>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Price ($)</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    value={this.state.price}
-                                    className="form-control"
-                                    onChange={this.onPriceChange}
-                                />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Category</td>
-                            <td>
-                                <select
-                                    onChange={this.onCategoryChange}
-                                    className="form-control"
-                                    value={this.state.selectedCategoryId}
-                                >
-                                    <option value="-1">Select Category...</option>
-                                    {categoriesOptions}
-                                </select>
-                            </td>
-                        </tr>
-
                         <tr>
                             <td></td>
                             <td>

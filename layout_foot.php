@@ -8,6 +8,11 @@
 
 <!-- main react components -->
 <!--<script type="text/babel" src="libs/js/react/main.js"></script>-->
+<script src="libs/js/react/components/thirdparty/TPdelete.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/thirdparty/TPcreate.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/thirdparty/TPedit.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/thirdparty/TPshow.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/thirdparty/TPtools.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/products/delete.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/products/edit.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/products/create.jsx" type="text/jsx"></script>
@@ -26,4 +31,5 @@
 <script src="libs/js/bootstrap/docs-assets/js/holder.js"></script>
 
 </body>
+
 </html>

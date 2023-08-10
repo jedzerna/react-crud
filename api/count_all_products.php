@@ -14,14 +14,14 @@ $db = $database->getConnection();
 $product = new Product($db);
 
 $where = '%%';
-$orderBy = 'p.name';
+$orderBy = 'department';
 $orderType = 'asc';
 $limit = 5;
 $currentPage = 1;
 
-if(isset($_GET['name']))
-    if(!empty($_GET['name']))
-        $where = '%' . $_GET['name'] . '%';
+if(isset($_GET['department']))
+    if(!empty($_GET['department']))
+        $where = '%' . $_GET['department'] . '%';
 
 // $results = $product->readAll();
 $results = $product->count($where);
