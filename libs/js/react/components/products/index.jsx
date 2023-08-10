@@ -439,7 +439,7 @@ var ReadProductsComponent = React.createClass({
         }
       }.bind(this)
     );
-    console.log(this.serverRequest);
+
     this.serverRequest = $.get(
       "api/count_all_products.php",
       parameters,

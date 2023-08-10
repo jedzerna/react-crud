@@ -126,7 +126,6 @@ var MainApp = React.createClass({
       />
     );
 
-    console.log(currentMode);
     switch (currentMode) {
       case "read":
         break;

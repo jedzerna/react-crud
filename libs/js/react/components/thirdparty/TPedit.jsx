@@ -31,21 +31,7 @@ var TPeditComponent = React.createClass({
         $(".page-header h1").text(p.Team);
       }.bind(this)
     );
-
-        // load form values
-        this.serverRequestProd = $.post('api/read_one_thirdparty.php',
-            {prod_id: productId},
-            function(product) {
-                var p = JSON.parse(product)[0];
-                this.setState({Team: p.Team});
-                this.setState({id: p.id});
-                this.setState({Purpose: p.Purpose});
-                this.setState({SoftwareName: p.SoftwareName});
-                this.setState({Details: p.Details});
-                this.setState({License: p.License});
-                this.setState({site: p.site});
-                $('.page-header h1').text(p.Team);
-            }.bind(this));
+  },
 
   componentWillUnmount: function () {
     // this.serverRequest.abort();
