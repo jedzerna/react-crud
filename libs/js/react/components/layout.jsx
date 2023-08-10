@@ -51,14 +51,37 @@ var MainApp = React.createClass({
 
         var currentMode = this.props.location[0] || 'read';
 
-        currentMode = currentMode.startsWith('update') ? (currentMode.split('?'))[0] : currentMode;
-        currentMode = currentMode.startsWith('create') ? (currentMode.split('?'))[0] : currentMode;
-        currentMode = currentMode.startsWith('page') ? (currentMode.split('='))[0] : currentMode;
-        currentMode = currentMode.startsWith('search') ? (currentMode.split('='))[0] : currentMode;
-        currentMode = currentMode.startsWith('show') ? (currentMode.split('?'))[0] : currentMode;
-        currentMode = currentMode.startsWith('delete') ? (currentMode.split('?'))[0] : currentMode;
-        currentMode = currentMode.startsWith('login') ? (currentMode.split('?'))[0] : currentMode;
-        currentMode = currentMode.startsWith('register') ? (currentMode.split('?'))[0] : currentMode;
+    currentMode = currentMode.startsWith("update")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("create")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("page")
+      ? currentMode.split("=")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("search")
+      ? currentMode.split("=")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("show")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("delete")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("login")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("home")
+      ? currentMode.split("?")[0]
+      : currentMode;
+    currentMode = currentMode.startsWith("register")
+      ? currentMode.split("?")[0]
+      : currentMode;
+      
+      currentMode = currentMode.startsWith('TPdelete') ? (currentMode.split('?'))[0] : currentMode;
+      currentMode = currentMode.startsWith('TPedit') ? (currentMode.split('?'))[0] : currentMode;
+      currentMode = currentMode.startsWith('TPshow') ? (currentMode.split('?'))[0] : currentMode;
 
         var productId = 0;
         var searchedTerm = '';
