@@ -5,7 +5,7 @@ class Database{
     private $host = "localhost";
     private $db_name = "novatechdb";
     private $username = "root";
-    private $password = "";
+    private $password = "J@hnJovence";
     public $conn;
 
     // get the database connection
