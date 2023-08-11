@@ -22,6 +22,7 @@ var TPeditComponent = React.createClass({
       { prod_id: productId },
       function (product) {
         var p = JSON.parse(product)[0];
+        this.setState({ id: p.id });
         this.setState({ Team: p.Team });
         this.setState({ Purpose: p.Purpose });
         this.setState({ SoftwareName: p.SoftwareName });
@@ -177,9 +178,7 @@ var TPeditComponent = React.createClass({
               <tr>
                 <td></td>
                 <td>
-                  <button className="btn btn-primary" onClick={this.onSave}>
-                    Save Changes
-                  </button>
+                  <button className="btn btn-primary">Save Changes</button>
                 </td>
               </tr>
             </tbody>
