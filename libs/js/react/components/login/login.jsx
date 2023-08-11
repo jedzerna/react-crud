@@ -63,32 +63,37 @@ var LoginComponent = React.createClass({
     render: function() {
         return (
             <div>
+                  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="bg-info p-3">
+        <input type="email" className="form-control" placeholder="Email address" name="email" value={this.state.email} onChange={this.onEmailChanged} style={{width:'30%',height:'45px'}}/>
+        </div>
+                        <br/>
+        <div class="bg-info p-3">
+        <input type="password" className="form-control" placeholder="Password" name="password" onChange={this.onPasswordChanged} style={{width:'30%',height:'45px'}}/>
+        </div>
+                        <br/>
+        <div class="bg-info p-3">
+        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.login} style={{width:'30%'}}>Sign in</button>
+                        </div>
+                        <br/>
+        <div class="bg-info p-3">
+            <a
+            href={"#register"}
+            className="btn btn-lg btn btn-success btn-block"
+            style={{width:'30%'}}
+            >
+                Register
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
                 <div className="col-md-4"></div>
-                <div className="col-md-4">
-                    <form>
-                        {
-                            this.state.successLogin != "true" && this.state.successLogin != null ?
-                                <div className="alert alert-danger">
-                                    {this.state.successLogin}
-                                </div>
-                                : null
-                        }
-                        <h2 className="form-signin-heading">Please sign in</h2>
-
-                        <input type="email" className="form-control" placeholder="Email address" name="email" value={this.state.email} onChange={this.onEmailChanged} />
-                        <br/>
-                        <input type="password" className="form-control" placeholder="Password" name="password" onChange={this.onPasswordChanged} />
-                        <br/>
-                        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>Sign in</button>
-                        <br/>
-                        <a
-                            href={"#register"}
-                            className="btn btn-lg btn btn-success btn-block"
-                            >
-                            Register
-                        </a>
-                    </form>
-                </div>
+                {/* <div className="col-md-4"> */}
+                  
+                {/* </div> */}
                 <div className="col-md-4"></div>
             </div>
         );

@@ -45,17 +45,6 @@ var NavComponent = React.createClass({
             <div>
             {
                 (this.state.isLoggedIn == 'false') ?
-
-                // <nav className="navbar navbar-default navbar-fixed-top">
-                //     <div className="container">
-                //         <div id="navbar" className="collapse navbar-collapse">
-                //             <ul className="nav navbar-nav">
-                //                 <li><a href="#">Home</a></li>
-                //                 <li><a href="#login">Sign In</a></li>
-                //             </ul>
-                //         </div>
-                //     </div>
-                // </nav>
                 <div>
                 </div>
                 :
@@ -63,7 +52,6 @@ var NavComponent = React.createClass({
                     <div className="container">
                         <div id="navbar" className="collapse navbar-collapse">
                             <ul className="nav navbar-nav">
-                                <li><a href="#">Home</a></li>
                                 <li className="dropdown">
                                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools<span className="caret"></span></a>
                                     <ul className="dropdown-menu">
