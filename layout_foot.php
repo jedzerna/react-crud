@@ -13,6 +13,20 @@
 <script src="libs/js/react/components/thirdparty/TPedit.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/thirdparty/TPshow.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/thirdparty/TPtools.jsx" type="text/jsx"></script>
+
+
+<script src="libs/js/react/components/projects/ProCreate.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/projects/ProDelete.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/projects/ProEdit.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/projects/ProIndex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/projects/ProShow.jsx" type="text/jsx"></script>
+
+<script src="libs/js/react/components/positions/PosCreate.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/positions/PosDelete.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/positions/PosEdit.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/positions/PosIndex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/positions/PosShow.jsx" type="text/jsx"></script>
+
 <script src="libs/js/react/components/products/delete.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/products/edit.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/products/create.jsx" type="text/jsx"></script>

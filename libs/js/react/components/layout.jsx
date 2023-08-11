@@ -86,6 +86,39 @@ var MainApp = React.createClass({
     currentMode = currentMode.startsWith("TPshow")
       ? currentMode.split("?")[0]
       : currentMode;
+      currentMode = currentMode.startsWith("ProCreate")
+        ? currentMode.split("?")[0]
+        : currentMode;
+        currentMode = currentMode.startsWith("ProDelete")
+          ? currentMode.split("?")[0]
+          : currentMode;
+          currentMode = currentMode.startsWith("ProEdit")
+            ? currentMode.split("?")[0]
+            : currentMode;
+            currentMode = currentMode.startsWith("ProIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("ProShow")
+                ? currentMode.split("?")[0]
+                : currentMode;
+
+
+                
+      currentMode = currentMode.startsWith("PosCreate")
+      ? currentMode.split("?")[0]
+      : currentMode;
+      currentMode = currentMode.startsWith("PosDelete")
+        ? currentMode.split("?")[0]
+        : currentMode;
+        currentMode = currentMode.startsWith("PosEdit")
+          ? currentMode.split("?")[0]
+          : currentMode;
+          currentMode = currentMode.startsWith("PosIndex")
+            ? currentMode.split("?")[0]
+            : currentMode;
+            currentMode = currentMode.startsWith("PosShow")
+              ? currentMode.split("?")[0]
+              : currentMode;
 
     var productId = 0;
     var searchedTerm = "";
@@ -183,6 +216,48 @@ var MainApp = React.createClass({
       case "register":
         modeComponent = <RegisterComponent />;
         break;
+
+
+        case "ProCreate":
+          modeComponent = <ProCreateComponent />;
+          break;
+          case "ProDelete":
+            productId = this.props.location[0].split("?")[1].split("=")[1];
+            modeComponent = <ProDeleteComponent productId={productId} />;
+            break;
+            case "ProEdit":
+              productId = this.props.location[0].split("?")[1].split("=")[1];
+              modeComponent = <ProEditComponent productId={productId} />;
+              break;
+              case "ProIndex":
+                modeComponent = <ProIndexComponent />;
+                break;
+                case "ProShow":
+                  productId = this.props.location[0].split("?")[1].split("=")[1];
+                  modeComponent = <ProShowComponent productId={productId} />;
+                  break;
+
+
+                  case "PosCreate":
+                    modeComponent = <PosCreateComponent />;
+                    break;
+                    case "PosDelete":
+                      productId = this.props.location[0].split("?")[1].split("=")[1];
+                      modeComponent = <PosDeleteComponent productId={productId} />;
+                      break;
+                      case "PosEdit":
+                        productId = this.props.location[0].split("?")[1].split("=")[1];
+                        modeComponent = <PosEditComponent productId={productId} />;
+                        break;
+                        case "PosIndex":
+                          modeComponent = <PosIndexComponent />;
+                          break;
+                          case "PosShow":
+                            productId = this.props.location[0].split("?")[1].split("=")[1];
+                            modeComponent = <PosShowComponent productId={productId} />;
+                            break;
+
+
       default:
         $(".page-header").html("<h1>Oops..</h1>");
         modeComponent = <NotFoundComponent />;

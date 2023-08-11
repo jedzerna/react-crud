@@ -404,15 +404,15 @@ var ReadProductsComponent = React.createClass({
     };
   },
 
-  componentDidMount: function () {
-    this.serverRequest = $.get(
-      "api/is_logged_in.php",
-      function (result) {
-        this.setState({
-          isLoggedIn: result,
-        });
-      }.bind(this)
-    );
+  componentDidMount: function() {
+    this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+        if(result == 'true')
+            this.setState({
+                isLoggedIn: result
+            });
+        else
+            window.location.href = '#login';
+    }.bind(this));
     this.populateProducts();
   },
 

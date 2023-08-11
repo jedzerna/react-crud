@@ -86,11 +86,11 @@ var RegisterComponent = React.createClass({
                         <h2 className="form-signin-heading">Please sign up</h2>
 
                         <input type="email" className="form-control" placeholder="Email address" name="email" value={this.state.email} onChange={this.onEmailChanged} />
-
+                        <br/>
                         <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.onPasswordChanged} />
+                        <br/>
                         <input type="password" className="form-control" placeholder="Confirm Password" name="password_confirmation" value={this.state.passwordConfirmation} onChange={this.onConfirmPasswordChanged} />
-
-
+                        <br/>
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>Sign up</button>
                     </form>
                 </div>
