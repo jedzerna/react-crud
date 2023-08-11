@@ -14,12 +14,12 @@ var ProCreateComponent = React.createClass({
 
     componentDidMount: function() {
         this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-            // if(result == 'true')
-            //     // this.setState({
-                    
-            //     // });
-            // else
-            //     window.location.href = '';
+            if(result == 'true')
+            this.setState({
+                isLoggedIn: result
+            });
+        else
+            window.location.href = '#login';
 
         }.bind(this));
 

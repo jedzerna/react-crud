@@ -9,12 +9,12 @@ var TPdeleteComponent = React.createClass({
 
     componentDidMount: function() {
         this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-            // if(result == 'true')
-            //     this.setState({
-            //         isLoggedIn: result
-            //     });
-            // else
-            //     window.location.href = '#TTools';
+            if(result == 'true')
+                this.setState({
+                    isLoggedIn: result
+                });
+            else
+                window.location.href = '#login';
         }.bind(this));
         $('.page-header h1').text('Delete Product');
     },

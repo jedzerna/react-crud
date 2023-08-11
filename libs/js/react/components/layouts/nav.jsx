@@ -46,17 +46,18 @@ var NavComponent = React.createClass({
             {
                 (this.state.isLoggedIn == 'false') ?
 
-                <nav className="navbar navbar-default navbar-fixed-top">
-                    <div className="container">
-                        <div id="navbar" className="collapse navbar-collapse">
-                            <ul className="nav navbar-nav">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#login">Sign In</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                
+                // <nav className="navbar navbar-default navbar-fixed-top">
+                //     <div className="container">
+                //         <div id="navbar" className="collapse navbar-collapse">
+                //             <ul className="nav navbar-nav">
+                //                 <li><a href="#">Home</a></li>
+                //                 <li><a href="#login">Sign In</a></li>
+                //             </ul>
+                //         </div>
+                //     </div>
+                // </nav>
+                <div>
+                </div>
                 :
                 <nav className="navbar navbar-default navbar-fixed-top">
                     <div className="container">

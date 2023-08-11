@@ -33,18 +33,18 @@ var UpdateProductComponent = React.createClass({
                 $('.page-header h1').text(p.department);
             }.bind(this));
 
-        // this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-        //     // if(result == 'true')
-        //     //     this.setState({
-        //     //         isLoggedIn: result
-        //     //     });
-        //     // else
-        //     //     window.location.href = '#';
-        // }.bind(this));
+        this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+            if(result == 'true')
+                this.setState({
+                    isLoggedIn: result
+                });
+            else
+                window.location.href = '#login';
+        }.bind(this));
     },
 
     componentWillUnmount: function() {
-        // this.serverRequest.abort();
+        this.serverRequest.abort();
         //this.serverRequestCat.abort();
         this.serverRequestProd.abort();
     },
