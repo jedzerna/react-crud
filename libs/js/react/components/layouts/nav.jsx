@@ -45,13 +45,22 @@ var NavComponent = React.createClass({
             <div>
             {
                 (this.state.isLoggedIn == 'false') ?
-                <div>
-                </div>
+               
+                <div></div>
+              
                 :
                 <nav className="navbar navbar-default navbar-fixed-top">
-                    <div className="container">
+                    <div className="container" style={{width:'85%'}}>
                         <div id="navbar" className="collapse navbar-collapse">
-                            <ul className="nav navbar-nav">
+                          
+                        <ul className="nav navbar-nav">
+                                <li>
+                            <a href="#">
+                            <img src="img/novatechsetlogo.png" alt="Logo" style={{width:'40px',height:'40px'}}/>
+                            </a>
+                                </li>
+                            </ul>
+                            <ul className="nav navbar-nav navbar-center">
                                 <li className="dropdown">
                                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools<span className="caret"></span></a>
                                     <ul className="dropdown-menu">
@@ -67,12 +76,23 @@ var NavComponent = React.createClass({
                                         <li><a href="#PosIndex">Open Positions</a></li>
                                     </ul>
                                 </li>
-                                {
+
+                              
+                            </ul>
+                            <ul className="nav navbar-nav navbar-center" style={{float:'right'}}>        
+                                    
+                                <li className="dropdown">
+
+                                    {
                                     (this.state.user != '') ?
-                                    <li><a>Welcome, {this.state.user.email}</a></li>
+                                    <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {this.state.user.email} <span className="caret"></span></a>
                                     : null
-                                }
-                                <li><a href="#logout" onClick={this.logout}>Sign Out</a></li>
+                                    }
+
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#logout" onClick={this.logout}>Sign Out</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -43,13 +43,18 @@
             cursor:pointer;
         }
 
+        .navbar-center {
+      position: relative;
+      top: 50%;
+      transform: translateY(20%);
+    }
     </style>
 
 </head>
 <body>
 
 <!-- container -->
-<div class="container">
+<div class="container" style="width: 80%;">
     <div class="page-header" style="margin-top:70px;">
         <h1>Loading..</h1>
     </div>
