@@ -1,6 +1,6 @@
 "use strict";
 
-var ProEditComponent = React.createClass({
+var PosEditComponent = React.createClass({
   getInitialState: function () {
     return {
         id: 0,
@@ -8,8 +8,8 @@ var ProEditComponent = React.createClass({
         Experience: "",
         PositionCount: "",
         SkillSets: "",
-        SubTeam: "",
-        Team: "",
+        Budget: "",
+        ReplacementAditional: "",
       successUpdate: null,
     };
   },
@@ -19,7 +19,7 @@ var ProEditComponent = React.createClass({
 
     // load form values
     this.serverRequestProd = $.post(
-      "api/projectsAPI/read_one_projects.php",
+      "api/positionAPI/read_one_position.php",
       { prod_id: productId },
       function (product) {
         var p = JSON.parse(product)[0];
@@ -28,8 +28,8 @@ var ProEditComponent = React.createClass({
         this.setState({ Experience: p.Experience });
         this.setState({ PositionCount: p.PositionCount });
         this.setState({ SkillSets: p.SkillSets });
-        this.setState({ SubTeam: p.SubTeam });
-        this.setState({ Team: p.Team });
+        this.setState({ Budget: p.Budget });
+        this.setState({ ReplacementAditional: p.ReplacementAditional });
         $(".page-header h1").text(p.Position);
       }.bind(this)
     );
@@ -67,28 +67,28 @@ onSkillSetsChange: function(e) {
 
 
 
-onSubTeamChange: function(e) {
+onBudgetChange: function(e) {
     this.setState({
-        SubTeam: e.target.value
+        Budget: e.target.value
     });
 },
-onTeamChange: function(e) {
+onReplacementAditionalChange: function(e) {
     this.setState({
-        Team: e.target.value
+        ReplacementAditional: e.target.value
     });
 },
 
   onSave: function (e) {
     $.post(
-      "api/projectsAPI/update_projects.php",
+      "api/positionAPI/update_position.php",
       {
         id: this.state.id,
         Position: this.state.Position,
         Experience: this.state.Experience,
         PositionCount: this.state.PositionCount,
         SkillSets: this.state.SkillSets,
-        SubTeam: this.state.SubTeam,
-        Team: this.state.Team,
+        Budget: this.state.Budget,
+        ReplacementAditional: this.state.ReplacementAditional,
       },
       function (res) {
         this.setState({ successUpdate: res });
@@ -101,15 +101,15 @@ onTeamChange: function(e) {
     return (
       <div>
         {this.state.successUpdate == "true" ? (
-          <div className="alert alert-success">Project was updated.</div>
+          <div className="alert alert-success">Data was updated.</div>
         ) : null}
         {this.state.successUpdate != "true" &&
         this.state.successUpdate != null ? (
           <div className="alert alert-danger">{this.state.successUpdate}</div>
         ) : null}
 
-        <a href="#ProIndex" className="btn btn-primary margin-bottom-1em">
-          All Projects
+        <a href="#PosIndex" className="btn btn-primary margin-bottom-1em">
+          Back
         </a>
         <form onSubmit={this.onSave}>
           <table className="table table-bordered table-hover">
@@ -128,7 +128,7 @@ onTeamChange: function(e) {
               </tr>
 
               <tr>
-                <td>Sr. Engineers</td>
+                <td>Experience</td>
                 <td>
                   <input
                     type="text"
@@ -141,7 +141,7 @@ onTeamChange: function(e) {
               </tr>
 
               <tr>
-                <td>PositionCount</td>
+                <td>Position Count</td>
                 <td>
                   <input
                     type="text"
@@ -154,7 +154,7 @@ onTeamChange: function(e) {
               </tr>
 
               <tr>
-                <td>Jr. Engineers	</td>
+                <td>Skill Sets</td>
                 <td>
                   <input
                     type="text"
@@ -167,26 +167,26 @@ onTeamChange: function(e) {
               </tr>
 
               <tr>
-                <td>Sub Team</td>
+                <td>Budget</td>
                 <td>
                   <input
                     type="text"
                     className="form-control"
-                    value={this.state.SubTeam}
-                    onChange={this.onSubTeamChange}
-                    title="SubTeam"
+                    value={this.state.Budget}
+                    onChange={this.onBudgetChange}
+                    title="Budget"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Team</td>
+                <td>Replacement/Aditional</td>
                 <td>
                   <textarea
                     className="form-control"
-                    value={this.state.Team}
-                    onChange={this.onTeamChange}
-                    title="Team"
+                    value={this.state.ReplacementAditional}
+                    onChange={this.onReplacementAditionalChange}
+                    title="ReplacementAditional"
                   ></textarea>
                 </td>
               </tr>
