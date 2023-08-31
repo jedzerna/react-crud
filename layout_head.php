@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ReactJS CRUD with PHP</title>
+    <title>Nova Techset Ltd.</title>
 
     <!-- Bootstrap CSS -->
     <link href="libs/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
@@ -41,12 +41,80 @@
 
         a {
             cursor:pointer;
+            font-size: 15px;
+            margin-left:10px;
         }
 
         .navbar-center {
       position: relative;
       top: 50%;
       transform: translateY(20%);
+    }
+    .my-pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  border: 1px solid #ccc; /* Add border to the pagination container */
+  padding: 10px; /* Add padding to the pagination container */
+}
+
+.my-pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 10px;
+}
+.my-pagination button{
+  border-radius: 10px;
+}
+
+.my-pagination li {
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid #ccc; /* Add border to page numbers */
+  padding: 5px 10px; /* Add padding to page numbers */
+}
+
+.my-pagination li.active {
+  font-weight: bold;
+}
+
+.my-pagination-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.my-pagination-container button:hover {
+  background-color: #0056b3;
+}
+
+.items-per-page {
+  margin-left: 10px;
+}
+.centered-container {
+    justify-content: center;
+    align-items: center;
+}
+.overflow-x {
+  overflow-x: auto;
+  max-width: 100%; /* Limit the maximum width of the table */
+} 
+.center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; 
+      margin-top: -20%;/* Make the container full height of the viewport */
+    }
+
+    /* Centered image */
+    .centered-image {
+      width: 50px;
     }
     </style>
 
@@ -55,6 +123,12 @@
 
 <!-- container -->
 <div class="container" style="width: 80%;">
-    <div class="page-header" style="margin-top:70px;">
-        <h1>Loading..</h1>
+    <div class="page-header" style="margin-top:90px;">
+    
+    <h1>
+        <!-- <img src="ico/loading3.gif" alt="Logo" style="width: 50px;"/> -->
+        <div class="center-container">
+          <img src="ico/loading3.gif" alt="Logo" class="centered-image">
+        </div>
+        </h1>
     </div>

@@ -46,10 +46,35 @@ var NavComponent = React.createClass({
             {
                 (this.state.isLoggedIn == 'false') ?
                
-                <div></div>
+                <nav className="navbar navbar-default navbar-fixed-top" style={{backgroundColor:'white'}}>
+                    <div className="container" style={{width:'85%'}}>
+                        <div id="navbar" className="collapse navbar-collapse">
+                          
+                        <ul className="nav navbar-nav">
+                                <li>
+                            <a href="#">
+                            <img src="img/novatechsetlogo.png" alt="Logo" style={{width:'40px',height:'40px'}}/>
+                            </a>
+                                </li>
+                            </ul>
+                            <ul className="nav navbar-nav navbar-center">
+                                <li>
+                                    <a href="#login">Sign In</a>
+                                   
+                                </li>
+                                <li>
+                                    <a href="#register">Sign Up</a>
+                                    
+                                </li>
+
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
               
                 :
-                <nav className="navbar navbar-default navbar-fixed-top">
+                <nav className="navbar navbar-default navbar-fixed-top" style={{backgroundColor:'white'}}>
                     <div className="container" style={{width:'85%'}}>
                         <div id="navbar" className="collapse navbar-collapse">
                           
@@ -69,14 +94,20 @@ var NavComponent = React.createClass({
                                     </ul>
                                 </li>
                                 <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Synergy<span className="caret"></span></a>
+                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View<span className="caret"></span></a>
                                     <ul className="dropdown-menu">
-                                        <li><a href="#">Employee</a></li>
+                                        <li><a href="#EmpIndex">Employee</a></li>
                                         <li><a href="#ProIndex">Projects</a></li>
                                         <li><a href="#PosIndex">Open Positions</a></li>
                                     </ul>
                                 </li>
-
+                                <li className="dropdown">
+                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Road Map<span className="caret"></span></a>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#roadIndex">Technology Road Map</a></li>
+                                        <li><a href="eeeW">Product Road Map</a></li>
+                                    </ul>
+                                </li>
                               
                             </ul>
                             <ul className="nav navbar-nav navbar-center" style={{float:'right'}}>        

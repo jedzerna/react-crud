@@ -14,6 +14,14 @@ var ProShowComponent = React.createClass({
   },
 
   componentDidMount: function () {
+    this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+      if(result == 'true')
+          this.setState({
+              isLoggedIn: result
+          });
+      else
+          window.location.href = '#login';
+  }.bind(this));
     var productId = this.props.productId;
     this.serverRequestProd = $.post(
       "api/projectsAPI/read_one_projects.php",
@@ -30,14 +38,6 @@ var ProShowComponent = React.createClass({
         $(".page-header h1").text(p.SkillSets);
       }.bind(this)
     );
-    this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-      if(result == 'true')
-          this.setState({
-              isLoggedIn: result
-          });
-      else
-          window.location.href = '#login';
-  }.bind(this));
   },
 
   componentWillUnmount: function () {

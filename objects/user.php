@@ -48,42 +48,29 @@ class User{
 
     public function create(){
         try{
-
+            if (strpos($this->email, '@novatechset.com') == false) {
+                return 'Your email cannot be an outsider. Please pick another email.';
+            }
             $query = "SELECT id
                 FROM " . $this->table_name . "
                 WHERE email = :email";
-
-            //prepare query for execution
             $stmt = $this->conn->prepare($query);
-
             $email=htmlspecialchars(strip_tags($this->email));
             $stmt->bindParam(':email', $email);
             $stmt->execute();
-
             $user = null;
             $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
-
             if(count($results) > 0) {
                 return 'Your email has been registered. Please pick another email.';
             } else {
-                // insert query
                 $query = "INSERT INTO users
                     SET email=:email, password=:password, created_at=:created";
-
-                // prepare query for execution
                 $stmt = $this->conn->prepare($query);
-
-                // sanitize
                 $email=htmlspecialchars(strip_tags($this->email));
                 $password=htmlspecialchars(strip_tags($this->password));
                 $salted_password = password_hash($password, PASSWORD_BCRYPT);
-
-                // bind the parameters
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $salted_password);
-
-                // we need the created variable to know when the record was created
-                // also, to comply with strict standards: only variables should be passed by reference
                 $created=date('Y-m-d H:i:s');
                 $stmt->bindParam(':created', $created);
 

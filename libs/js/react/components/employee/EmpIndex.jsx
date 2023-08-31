@@ -1,6 +1,6 @@
 "use strict";
 
-var ProIndexComponent = React.createClass({
+var EmpIndexComponent = React.createClass({
   getInitialState: function () {
     return {
       products: [],
@@ -28,7 +28,7 @@ var ProIndexComponent = React.createClass({
   },
   populateProducts: function () {
     this.serverRequest = $.get(
-      "api/projectsAPI/read_all_projects.php",
+      "api/employeeAPI/read_all_emloyee.php",
       function (products) {
         if (this.isMounted()) {
           this.setState({
@@ -50,7 +50,7 @@ var ProIndexComponent = React.createClass({
   renderTableData: function () {
     const { products, currentPage, itemsPerPage, searchQuery } = this.state;
     const filteredProducts = products.filter((product) => {
-      return product.SkillSets.toLowerCase().includes(searchQuery.toLowerCase());
+      return product.EmployeeName.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -61,38 +61,35 @@ var ProIndexComponent = React.createClass({
     return displayedProducts.map((product, index) => {
       return (
         <tr key={index}>
-          <td>{product.SkillSets}</td>
-          <td>{product.SrEngineers}</td>
-          <td>{product.Intermediates}</td>
-          <td>{product.JrEngineers}</td>
-          <td>{product.SubTeam}</td>
-          <td>{product.Team}</td>
+        <td>{product.EmployeeID}</td>
+          <td>{product.EmployeeName}</td>
+          <td>{product.PrimarySkillsets}</td>
+          <td>{product.SecondarySkillsets}</td>
+    
           {this.state.isLoggedIn == "false" ? (
             <td style={{ width: "120px" }}>
-            <a 
-                href={"#ProShow?id=" + product.id}
-              className="m-r-1em"
-              style={{ margin: "5px" }}
-              title="Read"
-            >
-              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
-            </a>
-            
-            <a
-                href={"#ProEdit?id=" + product.id}
-              className="m-r-1em"
-              style={{ margin: "5px" }}
-              title="Edit"
-            >
-              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
-            </a>
+              <a
+                href={"#EmpShow?id=" + product.id}
+                className="btn btn-info m-r-2em"
+                style={{ width: "100px", margin: "5px" }}
+              >
+                Read
+              </a>
+              <br />
+              <a
+                href={"#EmpEdit?id=" + product.id}
+                className="btn btn-primary m-r-1em"
+                style={{ width: "100px", margin: "5px" }}
+              >
+                Edit
+              </a>
             </td>
           ) : (
             // This is the one
             <td style={{ width: "120px" }}>
-              
+
             <a 
-                href={"#ProShow?id=" + product.id}
+                href={"#EmpShow?id=" + product.id}
               className="m-r-1em"
               style={{ margin: "5px" }}
               title="Read"
@@ -101,7 +98,7 @@ var ProIndexComponent = React.createClass({
             </a>
             
             <a
-                href={"#ProEdit?id=" + product.id}
+                href={"#EmpEdit?id=" + product.id}
               className="m-r-1em"
               style={{ margin: "5px" }}
               title="Edit"
@@ -109,15 +106,15 @@ var ProIndexComponent = React.createClass({
               <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
             <a
-                href={"#ProDelete?id=" + product.id}
+                href={"#EmpDelete?id=" + product.id}
               className="m-r-1em"
               style={{ margin: "5px" }}
               title="Delete"
             >
               <img src="ico/delete.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
+             
             </td>
-            
           )}
         </tr>
       );
@@ -127,6 +124,7 @@ var ProIndexComponent = React.createClass({
   renderPagination: function () {
     const { products, currentPage, itemsPerPage } = this.state;
     const totalPages = Math.ceil(products.length / itemsPerPage);
+
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
@@ -188,7 +186,6 @@ var ProIndexComponent = React.createClass({
       currentPage: pageNumber
     });
   },
-
   handlePreviousPage: function () {
     const { currentPage } = this.state;
     const prevPage = Math.max(currentPage - 1, 1);
@@ -216,18 +213,16 @@ var ProIndexComponent = React.createClass({
   },
 
   render: function () {
-    $(".page-header h1").text("Welcome to Projects Page!");
+    $(".page-header h1").text("Welcome to Employees Page!");
     return (
       <div>
         <form>
-		<p>The table presents an overview of skill sets, categorized into Senior Engineers,Intermediate-level professionals, </p>
-            <p>and Junior Engineers, within distinct sub-teams and the overarching team, accompanied by an "Actions" column.</p>
-    
+		<p>The provided information comprises a tabular representation of employees, including their unique Employee IDs and corresponding Employee Names. The "Primary Skillsets" column highlights the main areas of expertise possessed by each employee, while the "Secondary Skillsets" column denotes additional skill areas they are competent in. The "Actions" column likely indicates potential tasks, decisions, or options related to the employees' profiles. </p>
           <div className="input-group col-md-5 margin-bottom-1em pull-left">
             <input
               type="text"
               className="form-control searchbox"
-              placeholder="Search by team..."
+              placeholder="Search by employee name..."
               value={this.state.searchQuery}
               onChange={this.handleSearchChange}
             />
@@ -236,9 +231,9 @@ var ProIndexComponent = React.createClass({
               style={{ paddingRight: "10px" }}
             ></div>
 
-            <a href="#ProCreate" className="btn btn-primary">
+            <a href="#EmpCreate" className="btn btn-primary">
               <span className="glyphicon glyphicon-plus"></span>&nbsp; Create
-              Project
+              Employee
             </a>
           </div>
         </form>
@@ -246,13 +241,11 @@ var ProIndexComponent = React.createClass({
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-              <th  style={{ width: "15%" }}>Skill Sets</th>
-              <th  style={{ width: "15%" }}>Sr. Engineers</th>
-              <th style={{ width: "10%" }}>Intermediates</th>
-              <th style={{ width: "10%" }}>Jr. Engineers</th>
-              <th style={{ width: "15%" }}>Sub Team</th>
-              <th style={{ width: "25%" }}>Team</th>
-              <th style={{ width: "10%" }}>Actions</th>
+              <th style={{ width: "7%" }}>Employee ID</th>
+              <th style={{ width: "15%" }}>Employee Name</th>
+              <th style={{ width: "30%" }}>Primary Skillsets</th>
+              <th style={{ width: "30%" }}>Secondary Skillsets</th>
+              <th style={{ width: "9%" }}>Actions</th>
               {/* Add more table headers for other columns */}
             </tr>
           </thead>

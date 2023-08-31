@@ -6,7 +6,7 @@ var PosIndexComponent = React.createClass({
       products: [],
       isLoggedIn: "",
       currentPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 10,
       searchQuery: "", // Initial search query is empty
     };
   },
@@ -69,48 +69,54 @@ var PosIndexComponent = React.createClass({
           <td>{product.ReplacementAditional}</td>
           {this.state.isLoggedIn == "false" ? (
             <td style={{ width: "120px" }}>
-              <a
+              <a 
                 href={"#PosShow?id=" + product.id}
-                className="btn btn-info m-r-2em"
-                style={{ width: "100px", margin: "5px" }}
-              >
-                Read
-              </a>
-              <br />
-              <a
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Read"
+            >
+              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+            </a>
+            
+            <a
                 href={"#PosEdit?id=" + product.id}
-                className="btn btn-primary m-r-1em"
-                style={{ width: "100px", margin: "5px" }}
-              >
-                Edit
-              </a>
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Edit"
+            >
+              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+            </a>
             </td>
           ) : (
             // This is the one
             <td style={{ width: "120px" }}>
-              <a
+              
+            <a 
                 href={"#PosShow?id=" + product.id}
-                className="btn btn-info m-r-1em"
-                style={{ width: "100px", margin: "5px" }}
-              >
-                Read
-              </a>
-              <br />
-              <a
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Read"
+            >
+              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+            </a>
+            
+            <a
                 href={"#PosEdit?id=" + product.id}
-                className="btn btn-primary m-r-1em"
-                style={{ width: "100px", margin: "5px" }}
-              >
-                Edit
-              </a>
-              <br />
-              <a
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Edit"
+            >
+              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+            </a>
+            <a
                 href={"#PosDelete?id=" + product.id}
-                className="btn btn-danger"
-                style={{ width: "100px", margin: "5px" }}
-              >
-                Delete
-              </a>
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Delete"
+            >
+              <img src="ico/delete.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+            </a>
+              
             </td>
           )}
         </tr>
@@ -122,41 +128,66 @@ var PosIndexComponent = React.createClass({
     const { products, currentPage, itemsPerPage } = this.state;
     const totalPages = Math.ceil(products.length / itemsPerPage);
 
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <li
+          key={i}
+          className={currentPage === i ? 'active' : ''}
+          onClick={() => this.handlePageClick(i)}
+        >
+          {i}
+        </li>
+      );
+    }
+
     return (
-      <div className="pagination-container" style={{ width: "100%" }}>
-        <button
-          className="btn btn-primary"
-          style={{ margin: "10px" }}
-          onClick={this.handlePreviousPage}
-          disabled={currentPage === 1}
+      <div className="my-pagination-container">
+      <button
+        onClick={this.handleFirstPage}
+        disabled={currentPage === 1}
+      >
+        First Page
+      </button>
+      <button
+        onClick={this.handlePreviousPage}
+        disabled={currentPage === 1}
+      >
+        Previous Page
+      </button>
+      <ul className="my-pagination">
+        {pageNumbers}
+      </ul>
+      <button
+        onClick={this.handleNextPage}
+        disabled={currentPage === totalPages}
+      >
+        Next Page
+      </button>
+      <button
+        onClick={this.handleLastPage}
+        disabled={currentPage === totalPages}
+      >
+        Last Page
+      </button>
+      <div className="items-per-page">
+        Items per Page:
+        <select
+          value={this.state.itemsPerPage}
+          onChange={this.handleItemsPerPageChange}
         >
-          Previous Page
-        </button>
-        <button
-          className="btn btn-primary"
-          style={{ margin: "10px" }}
-          onClick={this.handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next Page
-        </button>
-        <div
-          className="input-group col-md-3 pull-right"
-          style={{ margin: "10px" }}
-        >
-          <select
-            className="form-control"
-            value={this.state.itemsPerPage}
-            onChange={this.handleItemsPerPageChange}
-            title="Items per page"
-          >
-            <option value="5">Show 5 Products per page</option>
-            <option value="10">Show 10 Products per page</option>
-            <option value="25">Show 25 Products per page</option>
-          </select>
-        </div>
+          <option value="10">10</option>
+          <option value="25">25</option>
+        </select>
       </div>
+    </div>
     );
+  },
+
+  handlePageClick: function (pageNumber) {
+    this.setState({
+      currentPage: pageNumber
+    });
   },
 
   handlePreviousPage: function () {
@@ -186,10 +217,12 @@ var PosIndexComponent = React.createClass({
   },
 
   render: function () {
-    $(".page-header h1").text("Open Positions");
+    $(".page-header h1").text("Welcome to Open Positions!");
     return (
       <div>
         <form>
+		<p>This overview captures crucial elements for effective position management.
+          </p>
           <div className="input-group col-md-5 margin-bottom-1em pull-left">
             <input
               type="text"
@@ -214,12 +247,12 @@ var PosIndexComponent = React.createClass({
           <thead>
             <tr>
               <th  style={{ width: "15%" }}>Position</th>
-              <th  style={{ width: "10%" }}>Experience</th>
-              <th style={{ width: "13%" }}>Position Count</th>
-              <th style={{ width: "40%" }}>Skill Sets</th>
-              <th style={{ width: "10%" }}>Budget</th>
+              <th  style={{ width: "7%" }}>Experience</th>
+              <th style={{ width: "8%" }}>Position Count</th>
+              <th style={{ width: "33%" }}>Skill Sets</th>
+              <th style={{ width: "7%" }}>Budget</th>
               <th style={{ width: "20%" }}>Replacement/Aditional</th>
-              <th>Actions</th>
+              <th style={{ width: "10%" }}>Actions</th>
               {/* Add more table headers for other columns */}
             </tr>
           </thead>

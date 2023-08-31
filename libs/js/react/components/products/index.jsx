@@ -26,43 +26,51 @@ var ProductRow = React.createClass({
         <td>{this.props.product.description}</td>
         {this.props.isLoggedIn == "true" ? (
           <td>
-            <a
+            <a 
               href={"#show?id=" + this.props.product.id}
-              className="btn btn-info m-r-2em"
-              style={{ width: "100px", margin: "5px" }}
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Read"
             >
-              Read
+              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
+            
             <a
               href={"#update?id=" + this.props.product.id}
-              className="btn btn-primary m-r-1em"
-              style={{ width: "100px", margin: "5px" }}
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Edit"
             >
-              Edit
+              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
             <a
               href={"#delete?id=" + this.props.product.id}
-              className="btn btn-danger"
-              style={{ width: "100px", margin: "5px" }}
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Delete"
             >
-              Delete
+              <img src="ico/delete.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
           </td>
+
         ) : (
           <td>
-            <a
+           <a 
               href={"#show?id=" + this.props.product.id}
-              className="btn btn-info m-r-1em"
-              style={{ width: "100px", margin: "5px" }}
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Read"
             >
-              Read
+              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
+            
             <a
               href={"#update?id=" + this.props.product.id}
-              className="btn btn-primary m-r-1em"
-              style={{ width: "100px", margin: "5px" }}
+              className="m-r-1em"
+              style={{ margin: "5px" }}
+              title="Edit"
             >
-              Edit
+              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
             </a>
           </td>
         )}
@@ -119,7 +127,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("department")}></i>
               </a>
             </th>
-            <th style={{ width: "15%" }}>
+            <th style={{ width: "11%" }}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
@@ -131,7 +139,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("toolname")}></i>
               </a>
             </th>
-            <th style={{ width: "15%" }}>
+            <th style={{ width: "10%" }}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
@@ -179,7 +187,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("description")}></i>
               </a>
             </th>
-            <th>Action</th>
+            <th style={{ width: "10%" }}>Action</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -377,7 +385,6 @@ var PaginationComponent = React.createClass({
               onChange={this.props.itemPerPageChanged}
               title="items per page"
             >
-              <option value="5">Show 5 Products per page</option>
               <option value="10">Show 10 Products per page</option>
               <option value="25">Show 25 Products per page</option>
             </select>
@@ -646,7 +653,7 @@ var ReadProductsComponent = React.createClass({
     if (this.state.search != "") {
       $(".page-header h1").text('Search "' + this.state.search + '"');
     } else {
-      $(".page-header h1").text("All Master Tools");
+      $(".page-header h1").text("Master Tools");
     }
 
     return (

@@ -1,15 +1,15 @@
 "use strict";
 
-var ProEditComponent = React.createClass({
+var RoadEditComponent = React.createClass({
   getInitialState: function () {
     return {
         id: 0,
-        SkillSets: "",
-        SrEngineers: "",
-        Intermediates: "",
-        JrEngineers: "",
-        SubTeam: "",
-        Team: "",
+        toolname: "",
+        createdby: "",
+        quarter: "",
+        description: "",
+        year: "",
+        developby: "",
       successUpdate: null,
     };
   },
@@ -27,18 +27,18 @@ var ProEditComponent = React.createClass({
 
     // load form values
     this.serverRequestProd = $.post(
-      "api/projectsAPI/read_one_projects.php",
+      "api/roadmap/read_one_road.php",
       { prod_id: productId },
       function (product) {
         var p = JSON.parse(product)[0];
-        this.setState({ SkillSets: p.SkillSets });
+        this.setState({ toolname: p.toolname });
         this.setState({ id: p.id });
-        this.setState({ SrEngineers: p.SrEngineers });
-        this.setState({ Intermediates: p.Intermediates });
-        this.setState({ JrEngineers: p.JrEngineers });
-        this.setState({ SubTeam: p.SubTeam });
-        this.setState({ Team: p.Team });
-        $(".page-header h1").text(p.SkillSets);
+        this.setState({ createdby: p.createdby });
+        this.setState({ quarter: p.quarter });
+        this.setState({ description: p.description });
+        this.setState({ year: p.year });
+        this.setState({ developby: p.developby });
+        $(".page-header h1").text(p.toolname);
       }.bind(this)
     );
   },
@@ -49,54 +49,54 @@ var ProEditComponent = React.createClass({
     this.serverRequestProd.abort();
   },
 
-  onSkillSetsChange: function(e) {
+  ontoolnameChange: function(e) {
     this.setState({
-        SkillSets: e.target.value
+        toolname: e.target.value
     });
 },
 
-onSrEngineersChange: function(e) {
+oncreatedbyChange: function(e) {
     this.setState({
-        SrEngineers: e.target.value
+        createdby: e.target.value
     });
 },
 
-onIntermediatesChange: function(e) {
+onquarterChange: function(e) {
     this.setState({
-        Intermediates: e.target.value
+        quarter: e.target.value
     });
 },
 
-onJrEngineersChange: function(e) {
+ondescriptionChange: function(e) {
     this.setState({
-        JrEngineers: e.target.value
+        description: e.target.value
     });
 },
 
 
 
-onSubTeamChange: function(e) {
+onyearChange: function(e) {
     this.setState({
-        SubTeam: e.target.value
+        year: e.target.value
     });
 },
-onTeamChange: function(e) {
+ondevelopbyChange: function(e) {
     this.setState({
-        Team: e.target.value
+        developby: e.target.value
     });
 },
 
   onSave: function (e) {
     $.post(
-      "api/projectsAPI/update_projects.php",
+      "api/roadmap/update_road.php",
       {
         id: this.state.id,
-        SkillSets: this.state.SkillSets,
-        SrEngineers: this.state.SrEngineers,
-        Intermediates: this.state.Intermediates,
-        JrEngineers: this.state.JrEngineers,
-        SubTeam: this.state.SubTeam,
-        Team: this.state.Team,
+        toolname: this.state.toolname,
+        createdby: this.state.createdby,
+        quarter: this.state.quarter,
+        description: this.state.description,
+        year: this.state.year,
+        developby: this.state.developby,
       },
       function (res) {
         this.setState({ successUpdate: res });
@@ -116,85 +116,86 @@ onTeamChange: function(e) {
           <div className="alert alert-danger">{this.state.successUpdate}</div>
         ) : null}
 
-        <a href="#ProIndex" className="btn btn-primary margin-bottom-1em">
+        <a href="#roadIndex" className="btn btn-primary margin-bottom-1em">
           All Projects
         </a>
         <form onSubmit={this.onSave}>
           <table className="table table-bordered table-hover">
             <tbody>
               <tr>
-                <td>Skill Sets</td>
+                <td>Tool Name</td>
                 <td>
                   <input
                     type="text"
                     className="form-control"
-                    value={this.state.SkillSets}
-                    onChange={this.onSkillSetsChange}
-                    title="SkillSets"
+                    value={this.state.toolname}
+                    onChange={this.ontoolnameChange}
+                    title="toolname"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Sr. Engineers</td>
+                <td>Created By</td>
                 <td>
-                  <input
+                  <input 
+                  disabled
                     type="text"
                     className="form-control"
-                    value={this.state.SrEngineers}
-                    onChange={this.onSrEngineersChange}
-                    title="SrEngineers"
+                    value={this.state.createdby}
+                    onChange={this.oncreatedbyChange}
+                    title="createdby"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Intermediates</td>
+                <td>Quarter</td>
                 <td>
                   <input
                     type="text"
                     className="form-control"
-                    value={this.state.Intermediates}
-                    onChange={this.onIntermediatesChange}
-                    title="Intermediates"
+                    value={this.state.quarter}
+                    onChange={this.onquarterChange}
+                    title="quarter"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Jr. Engineers	</td>
+                <td>Description</td>
                 <td>
                   <input
                     type="text"
                     className="form-control"
-                    value={this.state.JrEngineers}
-                    onChange={this.onJrEngineersChange}
-                    title="JrEngineers	"
+                    value={this.state.description}
+                    onChange={this.ondescriptionChange}
+                    title="description	"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Sub Team</td>
+                <td>Year</td>
                 <td>
                   <input
                     type="text"
                     className="form-control"
-                    value={this.state.SubTeam}
-                    onChange={this.onSubTeamChange}
-                    title="SubTeam"
+                    value={this.state.year}
+                    onChange={this.onyearChange}
+                    title="year"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td>Team</td>
+                <td>Develop By</td>
                 <td>
                   <textarea
                     className="form-control"
-                    value={this.state.Team}
-                    onChange={this.onTeamChange}
-                    title="Team"
+                    value={this.state.developby}
+                    onChange={this.ondevelopbyChange}
+                    title="developby"
                   ></textarea>
                 </td>
               </tr>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2023 at 08:54 AM
+-- Generation Time: Aug 14, 2023 at 09:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,6 +44,32 @@ CREATE TABLE `mastertools` (
 INSERT INTO `mastertools` (`id`, `department`, `toolname`, `productname`, `activities`, `publishers`, `description`) VALUES
 (23, 'Technolgy - Electronic Deliverables', 'Cloud based LaTeX composition tool', 'Cloud based Automation', 'PDF Creation tool', 'All Customers', 'For OSA publisher, we have installed LaTeX software on AWS cloud and created watch folder concept for generating PDF. Customer w'),
 (25, 'Technolgy - Electronic Deliverables', 'TeX to Word conversion', 'TIAT', 'Word creation from Tex file', 'All Customers', 'Using the author supplied TeX file with minimal structuring this tool converts the .tex file into .doc format with all the equat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblemployees`
+--
+
+CREATE TABLE `tblemployees` (
+  `id` int(11) NOT NULL,
+  `EmployeeID` varchar(1000) NOT NULL,
+  `EmployeeName` varchar(1000) NOT NULL,
+  `PrimarySkillsets` varchar(1000) NOT NULL,
+  `SecondarySkillsets` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblemployees`
+--
+
+INSERT INTO `tblemployees` (`id`, `EmployeeID`, `EmployeeName`, `PrimarySkillsets`, `SecondarySkillsets`) VALUES
+(4, 'NTI955', 'Sivakumar E', '3B2', 'XML, Perlscript'),
+(5, 'NTI329', 'Vijay S', '3B2', 'XML, Perlscript, Javascript, CSS, HTML, XSLT'),
+(6, 'NTI1053', 'UDHAYANILA VELU', '.Net', 'MVC,C#, MsSQL, HTML5,CSS3,Javascript,Jquery,Typescript,Angular'),
+(7, 'NTI1038', 'SATHISH R', '.Net', 'MVC,C#, MsSQL, HTML5,CSS3,Javascript,Jquery,Typescript,Angular'),
+(8, 'NTI451', 'Harihararajan R', '.Net', '.Net MVC,.Net Core,Asp.net,C#,MsSQL,HTML5,CSS3,Angular,AWS S3,SQS,Lambda'),
+(9, 'NTI321', 'Ramakrishnan PV', 'QA, Testing, Jmeter.', 'Selenium, 3B2, XML, HTML, CSS, ');
 
 -- --------------------------------------------------------
 
@@ -171,6 +197,12 @@ ALTER TABLE `mastertools`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblemployees`
+--
+ALTER TABLE `tblemployees`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tblpositions`
 --
 ALTER TABLE `tblpositions`
@@ -203,6 +235,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `mastertools`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `tblemployees`
+--
+ALTER TABLE `tblemployees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblpositions`

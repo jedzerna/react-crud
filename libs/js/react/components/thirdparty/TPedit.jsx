@@ -14,6 +14,15 @@ var TPeditComponent = React.createClass({
   },
 
   componentDidMount: function () {
+    
+    this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+      if(result == 'true')
+          this.setState({
+              isLoggedIn: result
+          });
+      else
+          window.location.href = '#login';
+  }.bind(this));
     var productId = this.props.productId;
 
     // load form values
@@ -32,14 +41,6 @@ var TPeditComponent = React.createClass({
         $(".page-header h1").text(p.Team);
       }.bind(this)
     ); 
-    this.serverRequest = $.get('api/is_logged_in.php', function(result) {
-      if(result == 'true')
-          this.setState({
-              isLoggedIn: result
-          });
-      else
-          window.location.href = '#login';
-  }.bind(this));
   },
 
   componentWillUnmount: function () {

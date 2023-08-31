@@ -25,10 +25,12 @@ var MainApp = React.createClass({
     return {
       currentMode: "read",
       productId: null,
+      refid: null,
+      toolname: null,
     };
   },
 
-  changeAppMode: function (newMode, productId) {
+  changeAppMode: function (newMode, productId,toolname,refid) {
     this.setState({
       currentMode: newMode,
     });
@@ -37,11 +39,19 @@ var MainApp = React.createClass({
       this.setState({
         productId: productId,
       });
+    } if (toolname !== undefined) {
+      this.setState({
+        toolname: encodeURIComponent(toolname),
+      });
+    }if (refid !== undefined) {
+      this.setState({
+        refid: refid,
+      });
     }
   },
 
   render: function () {
-    var defaultItemPerPage = 5;
+    var defaultItemPerPage = 10;
     var defaultSearchText = "";
     var defaultCurrentPage = 1;
     var defaultOrderBy = "department";
@@ -120,7 +130,59 @@ var MainApp = React.createClass({
               ? currentMode.split("?")[0]
               : currentMode;
 
+
+
+              currentMode = currentMode.startsWith("EmpCreate")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("EmpDelete")
+              ? currentMode.split("?")[0]
+              : currentMode;
+        
+              currentMode = currentMode.startsWith("EmpIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("EmpShow")
+              ? currentMode.split("?")[0]
+              : currentMode;
+        
+              currentMode = currentMode.startsWith("EmpEdit")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+
+              currentMode = currentMode.startsWith("roadIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("roadCreate")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("roadDelete")
+              ? currentMode.split("?")[0]
+              : currentMode;
+                
+              currentMode = currentMode.startsWith("roadIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+              currentMode = currentMode.startsWith("roadShow")
+              ? currentMode.split("?")[0]
+              : currentMode;
+                
+              currentMode = currentMode.startsWith("roadEdit")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+              currentMode = currentMode.startsWith("roadShowTool")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+              currentMode = currentMode.startsWith("roadCreateTool")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
     var productId = 0;
+    var toolname = "";
     var searchedTerm = "";
     var sortColumn = "department";
     var sortType = "asc";
@@ -159,6 +221,7 @@ var MainApp = React.createClass({
       />
     );
 
+     
     switch (currentMode) {
       case "read":
         break;
@@ -218,46 +281,110 @@ var MainApp = React.createClass({
         break;
 
 
-        case "ProCreate":
-          modeComponent = <ProCreateComponent />;
+      case "ProCreate":
+        modeComponent = <ProCreateComponent />;
+        break;
+      case "ProDelete":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <ProDeleteComponent productId={productId} />;
+        break;
+      case "ProEdit":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <ProEditComponent productId={productId} />;
+        break;
+      case "ProIndex":
+        modeComponent = <ProIndexComponent />;
+        break;
+      case "ProShow":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <ProShowComponent productId={productId} />;
+        break;
+
+
+      case "PosCreate":
+        modeComponent = <PosCreateComponent />;
+        break;
+      case "PosDelete":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <PosDeleteComponent productId={productId} />;
+        break;
+      case "PosEdit":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <PosEditComponent productId={productId} />;
+        break;
+      case "PosIndex":
+        modeComponent = <PosIndexComponent />;
+        break;
+      case "PosShow":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <PosShowComponent productId={productId} />;
+        break;
+
+      case "EmpCreate":
+        modeComponent = <EmpCreateComponent />;
+        break;
+      case "EmpEdit":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <EmpEditComponent productId={productId} />;
+        break;
+      case "EmpIndex":
+        modeComponent = <EmpIndexComponent />;
+        break;
+      case "EmpShow":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <EmpShowComponent productId={productId} />;
+        break;
+      case "EmpDelete":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <EmpDeleteComponent productId={productId} />;
+        break;
+
+
+      case "roadIndex":
+        modeComponent = <RoadIndexComponent />;
+        break;
+
+            // case "roadIndex":
+            //       modeComponent = <roadIndexComponent />;
+            //       break;
+
+
+      case "roadCreate":
+        modeComponent = <RoadCreateComponent />;
+        break;
+      case "roadEdit":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <RoadEditComponent productId={productId} />;
+        break;
+      case "roadIndex":
+        modeComponent = <RoadIndexComponent />;
+        break;
+      case "roadShow":
+        productId = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <RoadShowComponent productId={productId} />;
+        break;
+      case "roadDelete":
+        toolname = this.props.location[0].split("?")[1].split("=")[1];
+        modeComponent = <RoadDeleteComponent toolname={toolname} />;
+        break;
+
+        case "roadShowTool":
+          toolname = this.props.location[0].split("?")[1].split("=")[1];
+          modeComponent = <RoadShowToolComponent toolname={toolname} />;
           break;
-          case "ProDelete":
-            productId = this.props.location[0].split("?")[1].split("=")[1];
-            modeComponent = <ProDeleteComponent productId={productId} />;
+
+          case "roadCreateTool":
+            toolname = this.props.location[0].split("?")[1].split("=")[1];
+            modeComponent = <RoadCreateToolComponent toolname={toolname} />;
             break;
-            case "ProEdit":
+            case "roadEditTool":
               productId = this.props.location[0].split("?")[1].split("=")[1];
-              modeComponent = <ProEditComponent productId={productId} />;
+              modeComponent = <RoadEditToolComponent productId={productId} />;
               break;
-              case "ProIndex":
-                modeComponent = <ProIndexComponent />;
+              case "roadDeleteTool":
+                productId = this.props.location[0].split("?")[1].split("=")[1];
+                modeComponent = <RoadDeleteToolComponent productId={productId} />;
                 break;
-                case "ProShow":
-                  productId = this.props.location[0].split("?")[1].split("=")[1];
-                  modeComponent = <ProShowComponent productId={productId} />;
-                  break;
-
-
-                  case "PosCreate":
-                    modeComponent = <PosCreateComponent />;
-                    break;
-                    case "PosDelete":
-                      productId = this.props.location[0].split("?")[1].split("=")[1];
-                      modeComponent = <PosDeleteComponent productId={productId} />;
-                      break;
-                      case "PosEdit":
-                        productId = this.props.location[0].split("?")[1].split("=")[1];
-                        modeComponent = <PosEditComponent productId={productId} />;
-                        break;
-                        case "PosIndex":
-                          modeComponent = <PosIndexComponent />;
-                          break;
-                          case "PosShow":
-                            productId = this.props.location[0].split("?")[1].split("=")[1];
-                            modeComponent = <PosShowComponent productId={productId} />;
-                            break;
-
-
       default:
         $(".page-header").html("<h1>Oops..</h1>");
         modeComponent = <NotFoundComponent />;
