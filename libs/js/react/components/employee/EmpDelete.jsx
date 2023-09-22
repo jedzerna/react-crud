@@ -30,8 +30,7 @@ var EmpDeleteComponent = React.createClass({
             {del_ids: [productId]},
             function(res) {
                 window.location.replace('#EmpIndex');
-            }.bind(this)
-        );
+            }.bind(this));
     },
 
     render: function() {

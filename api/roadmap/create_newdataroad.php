@@ -34,7 +34,7 @@ if($_POST){
         $RoadMap->quarter = $_POST['quarter'];
         $RoadMap->description = $_POST['description'];
         $RoadMap->developby = $_POST['developby'];
-        $result = $RoadMap->createData() ? "true" : 'false';
+        $result = $RoadMap->createDatafromToolname() ? 'true' : 'false';
     }
 
     // create the product

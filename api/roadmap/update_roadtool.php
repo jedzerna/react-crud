@@ -21,12 +21,15 @@ if($_POST){
         $result = "The description must be filled.";
     } else if(is_null($_POST['developby']) || empty($_POST['developby'])) {
         $result = "The developby must be filled.";
+    } else if(is_null($_POST['quarter']) || empty($_POST['quarter'])) {
+        $result = "The quarter must be filled.";
     } else if(is_null($_POST['id']) || empty($_POST['id'])) {
         $result = "The id must be filled.";
     } else {
         // new values
         $RoadMap->description = $_POST['description'];
         $RoadMap->developby = $_POST['developby'];
+        $RoadMap->quarter = $_POST['quarter'];
         $RoadMap->id = $_POST['id'];
         $result = $RoadMap->updateToolOnly() ? "true" : 'false';
     }

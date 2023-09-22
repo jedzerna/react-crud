@@ -29,12 +29,12 @@ class ThirdParty{
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $Team=htmlspecialchars(strip_tags($this->Team));
-            $Purpose=htmlspecialchars(strip_tags($this->Purpose));
-            $SoftwareName=htmlspecialchars(strip_tags($this->SoftwareName));
-            $Details=htmlspecialchars(strip_tags($this->Details));
-            $License=htmlspecialchars(strip_tags($this->License));
-            $site=htmlspecialchars(strip_tags($this->site));
+            $Team=rawurldecode($this->Team);
+            $Purpose=rawurldecode($this->Purpose);
+            $SoftwareName=rawurldecode($this->SoftwareName);
+            $Details=rawurldecode($this->Details);
+            $License=rawurldecode($this->License);
+            $site=rawurldecode($this->site);
 
             // bind the parameters
             $stmt->bindParam(':Team', $Team);
@@ -88,13 +88,23 @@ class ThirdParty{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
         $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return json_encode($results);
+    }
+    public function gethighestid(){
+        $query = "SELECT MAX(id) AS max_id FROM " . $this->table_name;
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return json_encode($result['max_id']);
     }
 
     public function delete($ins){
@@ -103,7 +113,7 @@ class ThirdParty{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);
@@ -127,13 +137,13 @@ class ThirdParty{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $Team=htmlspecialchars(strip_tags($this->Team));
-        $Purpose=htmlspecialchars(strip_tags($this->Purpose));
-        $SoftwareName=htmlspecialchars(strip_tags($this->SoftwareName));
-        $Details=htmlspecialchars(strip_tags($this->Details));
-        $License=htmlspecialchars(strip_tags($this->License));
-        $site=htmlspecialchars(strip_tags($this->site));
-        $id=htmlspecialchars(strip_tags($this->id));
+        $Team=rawurldecode($this->Team);
+        $Purpose=rawurldecode($this->Purpose);
+        $SoftwareName=rawurldecode($this->SoftwareName);
+        $Details=rawurldecode($this->Details);
+        $License=rawurldecode($this->License);
+        $site=rawurldecode($this->site);
+        $id=rawurldecode($this->id);
 
         // bind the parameters
         $stmt->bindParam(':Team', $Team);

@@ -35,9 +35,17 @@ var ProShowComponent = React.createClass({
         this.setState({ JrEngineers: p.JrEngineers });
         this.setState({ SubTeam: p.SubTeam });
         this.setState({ Team: p.Team });
+
         $(".page-header h1").text(p.SkillSets);
-      }.bind(this)
-    );
+      }.bind(this));
+      this.serverRequest = $.get('api/is_logged_in.php', function(result) {
+        if(result == 'true')
+            this.setState({
+                isLoggedIn: result
+            });
+        else
+            window.location.href = '#login';
+    }.bind(this));
   },
 
   componentWillUnmount: function () {

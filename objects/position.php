@@ -29,12 +29,12 @@ class Position{
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $Position=htmlspecialchars(strip_tags($this->Position));
-            $Experience=htmlspecialchars(strip_tags($this->Experience));
-            $PositionCount=htmlspecialchars(strip_tags($this->PositionCount));
-            $SkillSets=htmlspecialchars(strip_tags($this->SkillSets));
-            $Budget=htmlspecialchars(strip_tags($this->Budget));
-            $ReplacementAditional=htmlspecialchars(strip_tags($this->ReplacementAditional));
+            $Position=rawurldecode($this->Position);
+            $Experience=rawurldecode($this->Experience);
+            $PositionCount=rawurldecode($this->PositionCount);
+            $SkillSets=rawurldecode($this->SkillSets);
+            $Budget=rawurldecode($this->Budget);
+            $ReplacementAditional=rawurldecode($this->ReplacementAditional);
 
             // bind the parameters
             $stmt->bindParam(':Position', $Position);
@@ -87,7 +87,7 @@ class Position{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -102,7 +102,7 @@ class Position{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);
@@ -126,13 +126,13 @@ class Position{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $Position=htmlspecialchars(strip_tags($this->Position));
-        $Experience=htmlspecialchars(strip_tags($this->Experience));
-        $PositionCount=htmlspecialchars(strip_tags($this->PositionCount));
-        $SkillSets=htmlspecialchars(strip_tags($this->SkillSets));
-        $Budget=htmlspecialchars(strip_tags($this->Budget));
-        $ReplacementAditional=htmlspecialchars(strip_tags($this->ReplacementAditional));
-        $id=htmlspecialchars(strip_tags($this->id));
+        $Position=rawurldecode($this->Position);
+        $Experience=rawurldecode($this->Experience);
+        $PositionCount=rawurldecode($this->PositionCount);
+        $SkillSets=rawurldecode($this->SkillSets);
+        $Budget=rawurldecode($this->Budget);
+        $ReplacementAditional=rawurldecode($this->ReplacementAditional);
+        $id=rawurldecode($this->id);
 
         // bind the parameters
         $stmt->bindParam(':Position', $Position);
@@ -149,5 +149,15 @@ class Position{
         }else{
             return false;
         }
+    }
+    public function gethighestid(){
+        $query = "SELECT MAX(id) AS max_id FROM " . $this->table_name;
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return json_encode($result['max_id']);
     }
 }

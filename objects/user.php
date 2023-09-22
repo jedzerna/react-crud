@@ -24,7 +24,7 @@ class User{
             //prepare query for execution
             $stmt = $this->conn->prepare($query);
 
-            $email=htmlspecialchars(strip_tags($this->email));
+            $email=rawurldecode($this->email);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
@@ -44,6 +44,36 @@ class User{
         } catch(PDOException $exception) {
             die('ERROR: ' . $exception->getMessage());
         }
+    } 
+    
+    public function authnopass() {
+        try {
+            $query = "SELECT id, email, created_at, password
+                FROM " . $this->table_name . "
+                WHERE email = :email";
+
+            //prepare query for execution
+            $stmt = $this->conn->prepare($query);
+
+            $email=rawurldecode($this->email);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            $user = null;
+            $results=$stmt->fetchAll(PDO::FETCH_OBJ);
+            if(count($results) > 0) {
+                $result = $results[0];
+                    session_start();
+                    $user = $result;
+                    $_SESSION['id'] = $user->id;
+                    $_SESSION['email'] = $user->email;
+                
+            }
+
+            return $user;
+        } catch(PDOException $exception) {
+            die('ERROR: ' . $exception->getMessage());
+        }
     }
 
     public function create(){
@@ -55,7 +85,7 @@ class User{
                 FROM " . $this->table_name . "
                 WHERE email = :email";
             $stmt = $this->conn->prepare($query);
-            $email=htmlspecialchars(strip_tags($this->email));
+            $email=rawurldecode($this->email);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
             $user = null;
@@ -66,8 +96,8 @@ class User{
                 $query = "INSERT INTO users
                     SET email=:email, password=:password, created_at=:created";
                 $stmt = $this->conn->prepare($query);
-                $email=htmlspecialchars(strip_tags($this->email));
-                $password=htmlspecialchars(strip_tags($this->password));
+                $email=rawurldecode($this->email);
+                $password=rawurldecode($this->password);
                 $salted_password = password_hash($password, PASSWORD_BCRYPT);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $salted_password);
@@ -143,7 +173,7 @@ class User{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -162,7 +192,7 @@ class User{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $password=htmlspecialchars(strip_tags($this->password));
+        $password=rawurldecode($this->password);
 
         // bind the parameters
         $stmt->bindParam(':password', $password);
@@ -182,7 +212,7 @@ class User{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);

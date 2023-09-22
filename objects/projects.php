@@ -29,12 +29,12 @@ class Projects{
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $SkillSets=htmlspecialchars(strip_tags($this->SkillSets));
-            $SrEngineers=htmlspecialchars(strip_tags($this->SrEngineers));
-            $Intermediates=htmlspecialchars(strip_tags($this->Intermediates));
-            $JrEngineers=htmlspecialchars(strip_tags($this->JrEngineers));
-            $SubTeam=htmlspecialchars(strip_tags($this->SubTeam));
-            $Team=htmlspecialchars(strip_tags($this->Team));
+            $SkillSets=rawurldecode($this->SkillSets);
+            $SrEngineers=rawurldecode($this->SrEngineers);
+            $Intermediates=rawurldecode($this->Intermediates);
+            $JrEngineers=rawurldecode($this->JrEngineers);
+            $SubTeam=rawurldecode($this->SubTeam);
+            $Team=rawurldecode($this->Team);
 
             // bind the parameters
             $stmt->bindParam(':SkillSets', $SkillSets);
@@ -87,7 +87,7 @@ class Projects{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -102,7 +102,7 @@ class Projects{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);
@@ -126,13 +126,13 @@ class Projects{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $SkillSets=htmlspecialchars(strip_tags($this->SkillSets));
-        $SrEngineers=htmlspecialchars(strip_tags($this->SrEngineers));
-        $Intermediates=htmlspecialchars(strip_tags($this->Intermediates));
-        $JrEngineers=htmlspecialchars(strip_tags($this->JrEngineers));
-        $SubTeam=htmlspecialchars(strip_tags($this->SubTeam));
-        $Team=htmlspecialchars(strip_tags($this->Team));
-        $id=htmlspecialchars(strip_tags($this->id));
+        $SkillSets=rawurldecode($this->SkillSets);
+        $SrEngineers=rawurldecode($this->SrEngineers);
+        $Intermediates=rawurldecode($this->Intermediates);
+        $JrEngineers=rawurldecode($this->JrEngineers);
+        $SubTeam=rawurldecode($this->SubTeam);
+        $Team=rawurldecode($this->Team);
+        $id=rawurldecode($this->id);
 
         // bind the parameters
         $stmt->bindParam(':SkillSets', $SkillSets);
@@ -149,5 +149,15 @@ class Projects{
         }else{
             return false;
         }
+    }
+    public function gethighestid(){
+        $query = "SELECT MAX(id) AS max_id FROM " . $this->table_name;
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return json_encode($result['max_id']);
     }
 }

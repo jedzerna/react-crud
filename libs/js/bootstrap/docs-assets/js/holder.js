@@ -345,6 +345,9 @@ function resizable_update(element) {
 	}
 }
 
+
+
+
 function parse_flags(flags, options) {
 	var ret = {
 		theme: extend(settings.themes.gray, {})

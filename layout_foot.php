@@ -30,6 +30,14 @@
 <script src="libs/js/react/components/roadmap/roadEditTool.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/roadmap/roadDeleteTool.jsx" type="text/jsx"></script>
 
+<script src="libs/js/react/components/mastertools/MtIndex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/techPending/techPIndex.jsx" type="text/jsx"></script>
+
+<script src="libs/js/react/components/mrrmachievements/achievementsindex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/ganttchart/GanttIndex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/forecast/ForecastIndex.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/forecast/ForecastShow.jsx" type="text/jsx"></script>
+<script src="libs/js/react/components/handletask/HandleIndex.jsx" type="text/jsx"></script>
 
 <script src="libs/js/react/components/projects/ProCreate.jsx" type="text/jsx"></script>
 <script src="libs/js/react/components/projects/ProDelete.jsx" type="text/jsx"></script>
@@ -59,6 +67,7 @@
 <!-- bootstrap JavaScript -->
 <script src="libs/js/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="libs/js/bootstrap/docs-assets/js/holder.js"></script>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+</body>
 </html>

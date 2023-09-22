@@ -25,31 +25,28 @@ var ProductRow = React.createClass({
         <td>{this.props.product.activities}</td>
         <td>{this.props.product.description}</td>
         {this.props.isLoggedIn == "true" ? (
-          <td>
+          <td className="actiontablecenter">
             <a 
               href={"#show?id=" + this.props.product.id}
-              className="m-r-1em"
-              style={{ margin: "5px" }}
+              className="aactionfontcustom"
               title="Read"
             >
-              <img src="ico/view.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+              <img src="ico/view.ico" alt="Logo" className="imgcustom"/>
             </a>
             
             <a
               href={"#update?id=" + this.props.product.id}
-              className="m-r-1em"
-              style={{ margin: "5px" }}
+              className="aactionfontcustom"
               title="Edit"
             >
-              <img src="ico/edit.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+              <img src="ico/edit.ico" alt="Logo" className="imgcustom" />
             </a>
             <a
               href={"#delete?id=" + this.props.product.id}
-              className="m-r-1em"
-              style={{ margin: "5px" }}
+              className="aactionfontcustom"
               title="Delete"
             >
-              <img src="ico/delete.ico" alt="Logo" style={{ width: '30px', height: '30px' }} />
+              <img src="ico/delete.ico" alt="Logo" className="imgcustom"/>
             </a>
           </td>
 
@@ -122,6 +119,7 @@ var ProductsTable = React.createClass({
                   "department",
                   this.props.orderType
                 )}
+
               >
                 Department
                 <i className={this.props.sortClass("department")}></i>
@@ -139,19 +137,20 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("toolname")}></i>
               </a>
             </th>
-            <th style={{ width: "10%" }}>
+            <th style={{ width: "11%"}}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
                   "productname",
                   this.props.orderType
                 )}
+                style={{ margin:'0'}}
               >
                 Product Name
                 <i className={this.props.sortClass("productname")}></i>
               </a>
             </th>
-            <th style={{ width: "15%" }}>
+            <th style={{ width: "10%" }}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
@@ -163,7 +162,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("publishers")}></i>
               </a>
             </th>
-            <th style={{ width: "13%" }}>
+            <th style={{ width: "10%" }}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
@@ -175,7 +174,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("activities")}></i>
               </a>
             </th>
-            <th style={{ width: "25%" }}>
+            <th style={{ width: "20%" }}>
               <a
                 onClick={this.props.sortChanged.bind(
                   null,
@@ -187,7 +186,7 @@ var ProductsTable = React.createClass({
                 <i className={this.props.sortClass("description")}></i>
               </a>
             </th>
-            <th style={{ width: "10%" }}>Action</th>
+            <th className="masteractionsizestable">Action</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -199,7 +198,7 @@ var ProductsTable = React.createClass({
 var SearchByName = React.createClass({
   render: function () {
     return (
-      <form role="search" action="#">
+      <form role="search" action="#MtIndex">
         <div className="input-group col-md-5 margin-bottom-1em pull-left">
           <input
             type="text"
@@ -255,7 +254,9 @@ var TopActionsComponent = React.createClass({
 var Loader = React.createClass({
   render: function () {
     if (this.props.isLoading == true) {
-      return <div className="text-center">Loading...</div>;
+      return  <div class="center-container">
+      <img src="ico/loading3.gif" alt="Logo" class="centered-image"/>
+    </div>;
     }
     return null;
   },
@@ -299,9 +300,9 @@ var PaginationComponent = React.createClass({
 
     // return paging buttons and 'go to page' form
     return !this.props.productsAmount ? null : (
-      <nav className="overflow-hidden" style={{ marginBottom: "20px" }}>
+      <nav className="overflow-hidden" style={{height:'10%'}}>
         {pagesAmount - 1 <= 0 ? null : (
-          <ul className="pagination pull-left margin-zero">
+          <ul className="pagination pull-left">
             {this.props.currentPage == 1 ? null : (
               <li>
                 <a
@@ -354,7 +355,7 @@ var PaginationComponent = React.createClass({
           </ul>
         )}
 
-        <form method="get" action="#">
+        <form method="get" action="#MtIndex">
           <div className="input-group col-md-2 pull-right">
             <input type="hidden" name="s" value="" />
             <input
@@ -457,6 +458,7 @@ var ReadProductsComponent = React.createClass({
         });
       }.bind(this)
     );
+    $(".page-header").css('border-bottom','1px solid #eeeeee');  
   },
 
   onInputPageChange: function (e) {
@@ -562,7 +564,7 @@ var ReadProductsComponent = React.createClass({
 
   onInputSearchChanged: function (e) {
     if (!e.target.value) {
-      window.location.replace("#");
+      window.location.replace("#MtIndex");
       this.setState(
         {
           search: e.target.value,
@@ -589,6 +591,7 @@ var ReadProductsComponent = React.createClass({
         selectedRows: this.state.selectedRows.filter((el) => el !== id),
       });
     }
+    console.log(this.state.selectedRows);
   },
 
   toggleAll: function (e) {

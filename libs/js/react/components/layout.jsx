@@ -12,7 +12,7 @@ var NotFoundComponent = React.createClass({
             </div>
           </div>
         </div>
-        <a class="btn btn-primary" href="#">
+        <a class="btn btn-primary" href="#MtIndex">
           Back to Home Page
         </a>
       </div>
@@ -23,7 +23,7 @@ var NotFoundComponent = React.createClass({
 var MainApp = React.createClass({
   getInitialState: function () {
     return {
-      currentMode: "read",
+      currentMode: "MtIndex",
       productId: null,
       refid: null,
       toolname: null,
@@ -57,7 +57,7 @@ var MainApp = React.createClass({
     var defaultOrderBy = "department";
     var defaultOrderType = "asc";
 
-    var currentMode = this.props.location[0] || "read";
+    var currentMode = this.props.location[0] || "MtIndex";
 
     currentMode = currentMode.startsWith("update")
       ? currentMode.split("?")[0]
@@ -180,6 +180,35 @@ var MainApp = React.createClass({
               currentMode = currentMode.startsWith("roadCreateTool")
               ? currentMode.split("?")[0]
               : currentMode;
+              currentMode = currentMode.startsWith("MtIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("master")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("achievementsindex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+              
+              currentMode = currentMode.startsWith("GanttIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              
+              currentMode = currentMode.startsWith("ForecastIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("ForecastShow")
+              ? currentMode.split("?")[0]
+              : currentMode;
+              currentMode = currentMode.startsWith("HandleIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
+
+              
+              currentMode = currentMode.startsWith("techPIndex")
+              ? currentMode.split("?")[0]
+              : currentMode;
 
     var productId = 0;
     var toolname = "";
@@ -212,12 +241,12 @@ var MainApp = React.createClass({
       item_per_page === undefined ? defaultItemPerPage : item_per_page;
 
     var modeComponent = (
-      <ReadProductsComponent
-        itemPerPage={defaultItemPerPage}
-        currentPage={defaultCurrentPage}
-        search={defaultSearchText}
-        orderBy={defaultOrderBy}
-        orderType={defaultOrderType}
+      <MtIndexComponent
+        // itemPerPage={defaultItemPerPage}
+        // currentPage={defaultCurrentPage}
+        // search={defaultSearchText}
+        // orderBy={defaultOrderBy}
+        // orderType={defaultOrderType}
       />
     );
 
@@ -229,6 +258,21 @@ var MainApp = React.createClass({
         initialPage = getParameterByName(pageParameterName);
         initialPage = parseInt(initialPage) <= 0 ? "1" : initialPage;
         modeComponent = (
+          <MtIndexComponent
+            // itemPerPage={itemPerPage}
+            // currentPage={initialPage}
+            // search={searchedTerm}
+            // orderBy={sortColumn}
+            // orderType={sortType}
+          />
+
+        );
+        break;
+        
+      case "master":
+        initialPage = getParameterByName(pageParameterName);
+        initialPage = parseInt(initialPage) <= 0 ? "1" : initialPage;
+        modeComponent = (
           <ReadProductsComponent
             itemPerPage={itemPerPage}
             currentPage={initialPage}
@@ -236,6 +280,7 @@ var MainApp = React.createClass({
             orderBy={sortColumn}
             orderType={sortType}
           />
+
         );
         break;
       case "show":
@@ -385,18 +430,56 @@ var MainApp = React.createClass({
                 productId = this.props.location[0].split("?")[1].split("=")[1];
                 modeComponent = <RoadDeleteToolComponent productId={productId} />;
                 break;
+
+                
+              case "MtIndex":
+                modeComponent = <MtIndexComponent />;
+                break;
+                case "achievementsindex":
+                  modeComponent = <AchievementsindexComponent />;
+                  break;
+                  case "GanttIndex":
+                    modeComponent = <GanttIndexComponent />;
+                    break;
+                    case "ForecastIndex":
+                      modeComponent = <ForecastIndexComponent />;
+                      break;
+                      case "ForecastShow":
+                        toolname = this.props.location[0].split("?")[1].split("=")[1];
+                        modeComponent = <ForecastShowComponent toolname={toolname} />;
+                        break;
+                        
+                    case "HandleIndex":
+                      modeComponent = <HandleIndexComponent />;
+                      break;
+
+                      
+                      case "techPIndex":
+                        modeComponent = <TechpIndexComponent/>;
+                        break;
       default:
         $(".page-header").html("<h1>Oops..</h1>");
         modeComponent = <NotFoundComponent />;
         break;
     }
     var navComponent = <NavComponent />;
-    return (
-      <div>
-        {navComponent}
-        {modeComponent}
-      </div>
-    );
+
+    if(currentMode == 'login' || currentMode == 'register'){
+      $(".page-header").css('border-bottom','0px');
+      return (
+        <div>
+          {modeComponent}
+        </div>
+      );
+    }else{
+      $(".page-header").css('border-bottom','1px');
+      return (
+        <div>
+          {navComponent}
+          {modeComponent}
+        </div>
+      );
+    }
   },
 });
 

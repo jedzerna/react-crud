@@ -39,8 +39,10 @@ template {
 
 html {
   font-family: sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+  
+  font-size: 16px;
+  /* -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%; */
 }
 
 body {
@@ -128,9 +130,17 @@ sub {
 img {
   border: 0;
 }
-
+:root {
+  --scaled-size: 150%;
+  --original-size: calc(var(--scaled-size) / 1.5);
+  --new-size: calc(var(--original-size) * 0.8); /* Calculate the new size */
+}
 svg:not(:root) {
   overflow: hidden;
+}
+.scaled-body {
+  width: var(--new-size);
+  height: var(--new-size);
 }
 
 figure {
@@ -213,7 +223,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 @media print {
   * {
     color: #000 !important;
@@ -272,6 +281,13 @@ table {
   .table td,
   .table th {
     background-color: #fff !important;
+    font-size: 16px; /* Adjust the initial font size */
+    transition: font-size 0.3s ease-in-out;
+  } 
+  .table.scaled  td,
+  .table.scaled  th {
+    background-color: #fff !important;
+    font-size: 24px; /* Adjust the scaled font size */
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -574,12 +590,17 @@ cite {
 
 .text-center {
   text-align: center;
+  margin: 0;
 }
 
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
+}
+.page-headertitle {
+  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
 }
 
 ul,
@@ -1946,6 +1967,25 @@ output {
           transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+.form-control-forlogin {
+  display: block;
+  width: 70%;
+  height: 60px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          border-radius: 6px;
+}
+
 .form-control:focus {
   border-color: #66afe9;
   outline: 0;
@@ -1953,6 +1993,12 @@ output {
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
+.form-control-forlogin:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
 .form-control:-moz-placeholder {
   color: #999999;
 }
@@ -2069,7 +2115,7 @@ textarea.input-sm {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 select.input-lg {
@@ -3932,7 +3978,7 @@ input[type="button"].btn-block {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 select.input-group-lg > .form-control,
@@ -4011,7 +4057,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-addon.input-lg {
   padding: 10px 16px;
   font-size: 18px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .input-group-addon input[type="radio"],
@@ -4707,7 +4753,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-  background-color: #f8f8f8;
   border-color: #e7e7e7;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the shadow properties as needed */
 }
@@ -7124,3 +7169,388 @@ td.visible-print {
     display: none !important;
   }
 }
+
+@media (min-resolution: 72dpi) and (max-resolution: 120dpi) {    
+  html {
+    font-size: 10px; /* Adjust the base font size for low-res screens */
+  } 
+  table thead tr th a {
+   font-size: 15px;
+   margin: 0;  /* Display as inline-block to enable vertical alignment */
+   vertical-align: top;
+ } 
+  table tbody tr td {
+    margin: 0; /* Adjust the base font size for medium-res screens */
+  }  
+  table tbody tr td a {
+    font-size: 5px;
+    margin: 0px; /* Adjust the base font size for medium-res screens */
+  }
+  .imgcustom{
+    width: 33px;
+    height: 33px;
+    margin: 3px;
+  }
+  .imgnavlogo{
+    width: 40px;
+    height: 40px;
+  }
+  
+  .navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+  .actiontablecenter{
+    text-align: center;
+    margin: 0;
+  }
+  .masteractionsizestable{
+    width: 8%;
+    text-align: center;
+    margin: 0;
+  }
+  .posactionsizestable{
+    width: 9%;
+  }
+  .thirdactionsizestable{
+    width: 8%;
+  }
+  .achiactionsizestable{
+    width: 9%;
+  }
+  .empactionsizestable{
+    width: 9%;
+  }
+  .proactionsizestable{
+    width: 8%;
+  }
+  .handctionsizestable{
+    width: 6%;
+  }
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+    margin-top: 90px;
+  }
+  .logininputleft{
+    width: 50%;
+    height: 80vh;
+    float: left;
+    /* align-content: center; */
+    /* align-items: center; */
+  }
+ .logininput{
+    margin-left: 25%;
+    padding-top: 10%;
+  }  
+  .logininput h1{
+    margin-left: -30%;
+  }    
+  .logininput img{
+    width: 20%;
+    height: 20%;
+    margin-left: -30%;
+  }  
+  .logininputright{
+    width: 50%;
+    height: 80vh;
+    float: left;
+  }
+  .logininfoborder{
+    justify-content: center;
+    vertical-align: middle;
+    border-left: 3px solid #e71e4a;
+    margin-top: 5%;
+    margin-bottom: auto;
+    height: 75%;
+    color: #777777;
+  }
+  .logininfo{
+    border-left: 4px solid #737170;
+    padding-top: 18%;
+    height: 100%;
+  }
+  .logininfo h1{
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 65px;
+    font-weight: bold;
+    margin-left: 7%;
+  }
+
+  .navbar-toggle{
+    margin-top: 20px;
+  }
+  .navbar-default {
+    /* background-color: #f8f8f8; */
+  }
+  .navbar-collapse {
+    top:0px;
+    width: 100%;
+    max-height: 300px;
+    height: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+    overflow-x: visible;
+    background-color: white;
+    border-top: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+/* Medium-resolution screens */
+@media (min-resolution: 121dpi) and (max-resolution: 192dpi) {   /*   150% scale*/
+  html {
+    font-size: 10px; /* Adjust the base font size for medium-res screens */
+  } 
+   table thead tr th a {
+    font-size: 12px;
+    margin: 0;  /* Display as inline-block to enable vertical alignment */
+    vertical-align: top;
+  } 
+  table thead tr th {
+   font-size: 12px;
+   margin: 0;  /* Display as inline-block to enable vertical alignment */
+   vertical-align: top;
+ } 
+  table tbody tr td a{
+    font-size: 12px;
+    margin: 0px; 
+    padding: 0px;/* Adjust the base font size for medium-res screens */
+  }
+  table tbody tr td a {
+    font-size: 10px;
+    margin: 5px; /* Adjust the base font size for medium-res screens */
+  }
+  .imgcustom{
+    width: 23px;
+    height: 23px;
+    margin: 1px;
+  }
+  .aactionfontcustom{
+    margin: 0px;
+  }
+
+  ul li a {
+    font-size: 12px; /* 14px for base 16px font size */
+  }
+  nav{
+    height: 54px;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: #777777;
+    border-radius: 3px;
+    height:30px;
+   
+  }
+  .navbar-nav > li > a {
+    padding-top: 5px;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    color: #333333;
+    border-radius: 5px;
+  }
+  .imgnavlogo{
+    width: 25px;
+    height: 25px;
+  } 
+  .navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-top: -2px;
+
+  }
+  .actiontablecenter{
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+  }
+  .masteractionsizestable{
+    width: 9%;
+    text-align: center;
+    margin: 0;
+  }
+  .posactionsizestable{
+    width: 11%;
+  }
+  .thirdactionsizestable{
+    width: 10%;
+  }
+  .empactionsizestable{
+    width: 10%;
+  }
+  .proactionsizestable{
+    width: 9%;
+  }
+  .handctionsizestable{
+    width: 9%;
+  }
+  .page-header h1 {
+    font-size: 28px;
+  } 
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+    margin-top: 70px;
+  }
+
+  .logininputleft{
+    width: 50%;
+    height: 80vh;
+    float: left;
+  }
+ .logininput{
+    margin-left: 25%;
+    padding-top: 0%;
+  }  
+  .logininput h1{
+    margin-left: -30%;
+  }    
+  .logininput img{
+    width: 20%;
+    height: 20%;
+    margin-left: -30%;
+  }  
+  .logininputright{
+    width: 50%;
+    height: 80vh;
+    float: left;
+  }
+  .logininfoborder{
+    justify-content: center;
+    vertical-align: middle;
+    border-left: 3px solid #e71e4a;
+    margin-top: 2%;
+    margin-bottom: auto;
+    height: 75%;
+    color: #777777;
+  }
+  .logininfo{
+    border-left: 4px solid #737170;
+    padding-top: 7%;
+    height: 100%;
+  }
+  .logininfo h1{
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 65px;
+    font-weight: bold;
+    margin-left: 7%;
+  }
+
+  .form-control-forlogin {
+    width: 70%;
+    height: 50px;
+  }
+
+  .navbar-toggle{
+    margin-top: 10px;
+  }
+  .navbar-collapse {
+    top:0px;
+    width: 100%;
+    max-height: 300px;
+    height: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+    overflow-x: visible;
+    background-color: white;
+    border-top: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    -webkit-overflow-scrolling: touch;
+  }
+  /* .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  } */
+}
+
+/* High-resolution screens */
+@media (min-resolution: 193dpi) {
+  html {
+    font-size: 10px; /* Adjust the base font size for high-res screens */
+  }   
+  table thead tr th a {
+    font-size: 30px;
+    margin: 0;  /* Display as inline-block to enable vertical alignment */
+    vertical-align: top;
+  } 
+  table tbody tr td {
+    margin: 0; /* Adjust the base font size for medium-res screens */
+  }
+  table tbody tr td a {
+    font-size: 30px;
+    margin: 5px; /* Adjust the base font size for medium-res screens */
+  }
+  .imgcustom{
+    width: 23px;
+    height: 23px;
+    margin: 1px;
+  }
+  .aactionfontcustom{
+    margin: 0px;
+  }
+
+  ul li a {
+    font-size: 30px; /* 14px for base 16px font size */
+  }
+   
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+ .float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+    color: red;
+}
+}
+
+
+
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  
+}
+input[type="date"]{
+    background-color: #0080ff;
+    padding: 15px;
+    position: relative;
+    transform: translate(-50%,-50%);
+    /* top: 50%;*/
+    left: 50%;
+    font-family: "Segoe UI Semibold",monospace;
+    color: #ffffff;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    
+  height: 34px;
+}
+::-webkit-calendar-picker-indicator{
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+

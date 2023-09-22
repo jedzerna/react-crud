@@ -30,12 +30,12 @@ class Product{
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $department=htmlspecialchars(strip_tags($this->department));
-            $toolname=htmlspecialchars(strip_tags($this->toolname));
-            $productname=htmlspecialchars(strip_tags($this->productname));
-            $publishers=htmlspecialchars(strip_tags($this->publishers));
-            $activities=htmlspecialchars(strip_tags($this->activities));
-            $description=htmlspecialchars(strip_tags($this->description));
+            $department=rawurldecode($this->department);
+            $toolname=rawurldecode($this->toolname);
+            $productname=rawurldecode($this->productname);
+            $publishers=rawurldecode($this->publishers);
+            $activities=rawurldecode($this->activities);
+            $description=rawurldecode($this->description);
 
             // bind the parameters
             $stmt->bindParam(':department', $department);
@@ -122,7 +122,7 @@ class Product{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -141,13 +141,13 @@ class Product{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $department=htmlspecialchars(strip_tags($this->department));
-        $toolname=htmlspecialchars(strip_tags($this->toolname));
-        $productname=htmlspecialchars(strip_tags($this->productname));
-        $publishers=htmlspecialchars(strip_tags($this->publishers));
-        $activities=htmlspecialchars(strip_tags($this->activities));
-        $description=htmlspecialchars(strip_tags($this->description));
-        $id=htmlspecialchars(strip_tags($this->id));
+        $department=rawurldecode($this->department);
+        $toolname=rawurldecode($this->toolname);
+        $productname=rawurldecode($this->productname);
+        $publishers=rawurldecode($this->publishers);
+        $activities=rawurldecode($this->activities);
+        $description=rawurldecode($this->description);
+        $id=rawurldecode($this->id);
 
         // bind the parameters
         $stmt->bindParam(':department', $department);
@@ -173,7 +173,7 @@ class Product{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);

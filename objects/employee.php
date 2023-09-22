@@ -27,10 +27,10 @@ class Employee{
             $stmt = $this->conn->prepare($query);
 
             // sanitize
-            $EmployeeID=htmlspecialchars(strip_tags($this->EmployeeID));
-            $EmployeeName=htmlspecialchars(strip_tags($this->EmployeeName));
-            $PrimarySkillsets=htmlspecialchars(strip_tags($this->PrimarySkillsets));
-            $SecondarySkillsets=htmlspecialchars(strip_tags($this->SecondarySkillsets));
+            $EmployeeID=rawurldecode($this->EmployeeID);
+            $EmployeeName=rawurldecode($this->EmployeeName);
+            $PrimarySkillsets=rawurldecode($this->PrimarySkillsets);
+            $SecondarySkillsets=rawurldecode($this->SecondarySkillsets);
             
 
             // bind the parameters
@@ -117,7 +117,7 @@ class Employee{
         //prepare query for execution
         $stmt = $this->conn->prepare($query);
 
-        $id=htmlspecialchars(strip_tags($this->id));
+        $id=rawurldecode($this->id);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -136,11 +136,11 @@ class Employee{
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $EmployeeID=htmlspecialchars(strip_tags($this->EmployeeID));
-        $EmployeeName=htmlspecialchars(strip_tags($this->EmployeeName));
-        $PrimarySkillsets=htmlspecialchars(strip_tags($this->PrimarySkillsets));
-        $SecondarySkillsets=htmlspecialchars(strip_tags($this->SecondarySkillsets));
-        $id=htmlspecialchars(strip_tags($this->id));
+        $EmployeeID=rawurldecode($this->EmployeeID);
+        $EmployeeName=rawurldecode($this->EmployeeName);
+        $PrimarySkillsets=rawurldecode($this->PrimarySkillsets);
+        $SecondarySkillsets=rawurldecode($this->SecondarySkillsets);
+        $id=rawurldecode($this->id);
 
         // bind the parameters
         $stmt->bindParam(':EmployeeID', $EmployeeID);
@@ -164,7 +164,7 @@ class Employee{
         //$query = "DELETE FROM products WHERE id IN (:ins)";
 
         // sanitize
-        $ins=htmlspecialchars(strip_tags($ins));
+        $ins=rawurldecode($ins);
 
         // bind the parameter
         //$stmt->bindParam(':ins', $ins);
@@ -177,5 +177,15 @@ class Employee{
         }else{
             return false;
         }
+    }
+    public function gethighestid(){
+        $query = "SELECT MAX(id) AS max_id FROM " . $this->table_name;
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return json_encode($result['max_id']);
     }
 }

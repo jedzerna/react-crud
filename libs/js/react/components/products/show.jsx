@@ -37,8 +37,7 @@ var ReadOneProductComponent = React.createClass({
         this.setState({ activities: p.activities });
         this.setState({ description: p.description });
         $(".page-header h1").text(p.department);
-      }.bind(this)
-    );
+      }.bind(this));
   },
 
   componentWillUnmount: function () {

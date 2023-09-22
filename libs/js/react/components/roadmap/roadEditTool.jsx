@@ -107,6 +107,7 @@ ondevelopbyChange: function(e) {
         id: this.props.productId,
         description: this.state.description,
         developby: this.state.developby,
+        quarter: this.state.quarter,
       },
       function (res) {
         
@@ -147,7 +148,7 @@ ondevelopbyChange: function(e) {
             <tr>
             <td>Category</td>
             <td>
-                <select disabled
+                <select 
                     onChange={this.onquarterChange}
                     className="form-control"
                     value={this.state.quarter}

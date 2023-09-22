@@ -25,8 +25,7 @@ var EmpShowComponent = React.createClass({
         this.setState({ SecondarySkillsets: p.SecondarySkillsets });
         
         $(".page-header h1").text(p.EmployeeName);
-      }.bind(this)
-    );
+      }.bind(this));
     this.serverRequest = $.get('api/is_logged_in.php', function(result) {
       if(result == 'true')
           this.setState({
