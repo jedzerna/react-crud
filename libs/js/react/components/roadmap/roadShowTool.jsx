@@ -475,7 +475,7 @@ ondevelopbyChange: function(e) {
             <a style={{marginLeft:'5px'}} 
             // onClick={(event) => this.handleItemClick(event, null,"createweekly")} 
            className="btn btn-info">
-              <span className="glyphicon glyphicon-plus"></span>&nbsp;  <b>Add Weekly Report (Coming Soon)</b>
+              <span className="glyphicon glyphicon-plus"></span>&nbsp;  <b>Add Today's Report (Coming Soon)</b>
             </a>
         </form>
            
